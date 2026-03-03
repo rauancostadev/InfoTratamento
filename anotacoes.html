@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informações do Tratamento</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+
+    
+<header class="navbar">
+    
+    <!-- Logo -->
+    <div class="navbar-header">
+        <a class="navbar-brand" 
+           href="https://ligacontraocancer.com.br/" 
+           target="_blank" 
+           rel="noopener noreferrer">
+            <img src="https://ligacontraocancer.com.br/wp-content/themes/v01/assets/img/build/liga-contra-o-cancer-footer-red.f7f3067c.png" 
+                 alt="Liga Contra o Câncer" 
+                 title="Liga Contra o Câncer">
+        </a>
+    </div>
+
+    <!-- Título central -->
+    <h1 class="titulo-central">Central de Marcação</h1>
+    
+
+    <!-- Menu -->
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="anotacoes.html">Anotações</a></li>
+            <li><a href="radioterapia.html">Agenda Radioterapia</a></li>
+        </ul>
+    </nav>
+</header>
+
+</head>
+<body>
+
+
+
+<h3>Saudações</h3>
+<div class="botoes-container">
+<button onclick="copiarTexto('bomdia')">Bom Dia</button>
+<button onclick="copiarTexto('boatarde')">Boa Tarde</button>
+<button onclick="copiarTexto('boanoite')">Boa Noite</button>
+
+<h3>Informações</h3>
+<div class="botoes-container">
+<button onclick="copiarTexto('entradaregula')">Passo a passo Regula</button>
+<button onclick="copiarTexto('preencherinfopaciente')">Preencher Info Paciente</button>
+<button onclick="copiarTexto('solicitacao')">Resposta Solicitação 1° vez</button>
+<button onclick="copiarTexto('hematologiaunimed')">Hemato Unimed 1° Vez</button>
+<button onclick="copiarTexto('hematonaoautorizado')">Hemato Não Autorizado</button>
+<button onclick="copiarTexto('solicitarpendencia')">Solicitar Pendência</button>
+
+<h3>Preparos das Consultas</h3>
+<div class="botoes-container">
+<button onclick="copiarTexto('consultasustratamento')">Consulta SUS - Tratamento</button>
+<button onclick="copiarTexto('consultasusnatal')">Consulta SUS - Natal</button>
+<button onclick="copiarTexto('consultasusinterior')">Consulta SUS - Interior</button>
+<button onclick="copiarTexto('consultaconvenio')">Consulta Convênio</button>
+<button onclick="copiarTexto('consultaparticular')">Consulta Particular</button>
+
+<h3>Valores de Consultas</h3>
+<div class="botoes-container">
+<button onclick="copiarTexto('consultaoncologia')">Consulta Oncologia</button>
+<button onclick="copiarTexto('consultahematologia')">Consulta Hematologia</button>
+<button onclick="copiarTexto('consultaradio')">Consulta Radioterapia</button>
+
+<h3>Contatos</h3>
+<div class="botoes-container">
+<button onclick="copiarTexto('contatosecretariaconv')">Secretária Convênio</button>
+<button onclick="copiarTexto('contatosecretariasus')">Secretária SUS</button>
+<button onclick="copiarTexto('secretariaradio')">Secretária Radio</button>
+<button onclick="copiarTexto('secretariatelefonia')">Secretária pela Telefonia</button>
+<button onclick="copiarTexto('contatopediatria')">Contato Pediatria</button>
+<button onclick="copiarTexto('contatocentraldemarcaçao')">Contato Central de Marcação</button>
+
+<h3>Finalizar atendimento</h3>
+<div class="botoes-container">
+<button onclick="copiarTexto('agendamentofeito')">Agendamento Realizado</button>
+<button onclick="copiarTexto('finalizandoexpediente')">Finalizando Expediente</button>
+<button onclick="copiarTexto('agradecimentonasemana')">Agradecer durante a semana</button>
+<button onclick="copiarTexto('agradecimentofinaldesemana')">Agradecer no fim de semana</button>
+
+
+</div>
+
+<script>
+function copiarTexto(tipo) {
+
+  let textos = {
+    bomdia: `Olá, bom dia!
+Seja bem vindo(a) a Central de Marcação da Liga, será um prazer lhe atender!
+
+Me chamo Rauan, atendente nas especialidades de ONCOLOGIA CLÍNICA e HEMATOLOGIA.`,
+
+    boatarde: `Olá, boa tarde!
+Seja bem vindo(a) a Central de Marcação da Liga, será um prazer lhe atender!
+
+Me chamo Rauan, atendente nas especialidades de ONCOLOGIA CLÍNICA e HEMATOLOGIA.`,
+
+    boanoite: `Olá, boa tarde!
+Seja bem vindo(a) a Central de Marcação da Liga, será um prazer lhe atender!
+
+Me chamo Rauan, atendente nas especialidades de ONCOLOGIA CLÍNICA e HEMATOLOGIA.`,
+
+    solicitacao: `Muito obrigado! Segue abaixo as orientações:
+
+*As informações foram encaminhadas ao setor responsável para ser realizada a triagem.* ✅
+
+- Favor aguardar a análise do médico.
+- Após a análise, retornaremos o contato sobre a liberação da consulta.
+- Prazo: 72h úteis, aproximadamente.`,
+
+    agendamentofeito: `*Confirmado o agendamento* ✅
+
+Teria dúvidas ou posso lhe ajudar em algo mais? 😊`,
+
+    agradecimentonasemana: `Meus agradecimentos e lhe desejo uma ótima e abençoada semana! 🙏`,
+
+    agradecimentofinaldesemana: `Meus agradecimentos e lhe desejo um ótimo e abençoado final de semana! 🙏`,
+
+    agendamentofeito: `*Confirmado o agendamento* ✅
+
+Teria dúvidas ou posso lhe ajudar em algo mais? 😊`,
+
+    preencherinfopaciente: `*Favor preencher as seguintes informações:*
+ 
+- *Nome completo:* 
+- *CPF (sem os pontos):* 
+- *Data de nascimento:* 
+- *Número de telefone:* 
+- *Convênio:* 
+
+- *Teria algum médico de sua preferência?*`,
+
+    contatosecretariaconv: `*8440095560* - Secretária da Oncologia/Hematologia Convênio (Apenas via WhatsApp)
+
+Segunda à sexta
+*Horário de atendimento:* 08:00 às 17:00`,
+
+    contatosecretariasus: `*8440095573* - Secretária da Oncologia/Hematologia SUS (Apenas via Ligação)
+*84991217016* - Secretária da Oncologia/Hematologia SUS (Apenas via WhatsApp)
+
+Segunda à sexta
+*Horário de atendimento:* 14:00 às 19:00`,
+
+    hematonaoautorizado: `O motivo do meu contato é a respeito da solicitação da triagem, os exames foram apresentados aos médicos hematologista e a consulta não foi liberada.
+
+Por sermos um hospital voltado ao diagnóstico de neoplasias malignas, a triagem realizada não identificou achados sugestivos de malignidade.
+
+Contamos com a sua compreensão e quaisquer dúvidas, poderá retornar o contato conosco, estamos à disposição.`,
+
+    solicitarpendencia: `ENCAIXE
+
+NOME: 
+CPF: 
+CTT: 
+
+Motivo: `,
+
+    contatopediatria: `Atendimento do setor pediátrico via WhatsApp: 
+Selecionar a opção "Outros setores"; "Pediatria"
+
+Ou via ligação, através do número:
+*8440095688* - Pediatria
+
+Segunda à sexta
+*Horário de atendimento:* 08:00 às 16:00`,
+
+    contatocentraldemarcaçao: `Atendimento via WhatsApp: 
+*8440095601*
+Selecionar a opção "02 - Consultas para Outras Especialidades e Cirurgiões Oncológicos"; "Cirurgião Oncológico"
+
+Ou via ligação, através do número:
+*40095600* - Central de marcação
+
+Segunda à sexta
+*Horário de atendimento:* 07:00 às 18:00`,
+
+    entradaregula: `*Segue o passo a passo para dar entrada na autorização:*
+
+1° Passo: Deve se dirigir a secretaria de saúde do município, portando o documento pessoal com foto e CPF.
+2° Passo: Solicitando inserir a consulta, informando a especialidade, médico solicitante e os dados do paciente.
+3° Passo: Aguardar entre 10 à 15 dias. Após ser liberada a autorização, entraremos em contato com o paciente para realizar o agendamento ou reagendamento.
+
+Caso a secretaria de saúde tenha dúvidas, favor, manter contato diretamente com a Sesap/RN e serão orientados.`,
+
+    secretariatelefonia: `*Setor de Telefonia:*
+Entrar em contato através do número *4009-5501*, selecionar a *opção 9* para falar com o setor de *telefonia* e em seguida, solicita falar com a secretária
+ 
+Segunda à sexta
+*Horário de atendimento:* 08:00 às 16:00`,
+
+    finalizandoexpediente: `{{NAME}}, estamos finalizando as nossas operações de atendimento e contamos com sua compreensão.`,
+
+    secretariaradio: `*4009-5575* - Secretária Radioterapia (Apenas via Ligação)
+*4009-7433* - Secretária Radioterapia (Apenas via Ligação)
+
+Segunda à sexta
+*Horário de atendimento:* 08:00 às 16:00`,
+
+   consultasustratamento: `*ATENÇÃO:* Paciente deverá chegar 30 minutos antes para registrar o atendimento e receber as informações necessárias para realização deste procedimento.
+   
+*Paciente deverá trazer no dia da consulta:*  
+- Documentos pessoais, comprovante de residência em seu nome, cartão do SUS atualizado do município em que reside, encaminhamento/ficha de referência, caso tenha.
+
+*Observação:* Não precisa solicitar a autorização para esta consulta, pois o paciente segue em tratamento. `,
+
+    consultasusnatal: `*ATENÇÃO:* Paciente deverá chegar 30 minutos antes para registrar o atendimento e receber as informações necessárias para realização deste procedimento.
+    
+*Paciente deverá trazer no dia da consulta:*  
+- Documentos pessoais, comprovante de residência em seu nome, cartão do SUS atualizado do município de Natal, encaminhamento/ficha de referência e exames anteriores, caso tenha.`,
+
+    consultasusinterior: `*ATENÇÃO:* Paciente deverá chegar 30 minutos antes para registrar o atendimento e receber as informações necessárias para realização deste procedimento.
+
+*Paciente deverá trazer no dia da consulta:*  
+- Documentos pessoais, comprovante de residência em seu nome, cartão do SUS atualizado do município em que reside, encaminhamento/ficha de referência, autorização do município REGULA/RN.`,
+
+    consultaconvenio: `*ATENÇÃO:* Paciente deverá chegar 30 minutos antes para registrar o atendimento e receber as informações necessárias para realização deste procedimento.
+    
+*Paciente deverá trazer no dia da consulta:*  
+- Documentos pessoais e exames anteriores para mostrar (caso tenha);
+- Carteira do Convênio.
+
+*Observação:* Não esquecer de agendar o seu retorno após a consulta.`,
+
+    consultaparticular: `*ATENÇÃO:* Paciente deverá chegar 30 minutos antes para registrar o atendimento e receber as informações necessárias para realização deste procedimento.
+    
+*Paciente deverá trazer no dia da consulta:*  
+- Documentos pessoais e exames anteriores para mostrar (caso tenha);
+
+*Observação:* Não esquecer de agendar o seu retorno após a consulta.`,
+
+    consultaoncologia: `A consulta oncologista clínico tem o valor de R$ 450,00, pode parcelar em ate 6 vezes, sem juros no cartão de crédito, com direito a um retorno de ate 30 dias`,
+
+    consultahematologia: `A consulta hematologista tem o valor de R$ 450,00, pode parcelar em ate 6 vezes, sem juros no cartão de crédito, com direito a um retorno de ate 45 dias`,
+
+    consultaradio: `A consulta radioterapia tem o valor de R$ 250,00, pode parcelar em ate 4 vezes, sem juros no cartão de crédito, com direito a um retorno de ate 30 dias`,
+
+    hematologiaunimed: `*Hematologia para adultos, convênio Unimed:*
+A medica atende apenas adultos, acima de 18 anos.
+
+Por ser a única médica hematologista que atende pela Unimed, aqui na Liga é priorizado os pacientes oncológicos.
+
+Encaminharemos a solicitação da triagem, a médica avaliará e em breve retornaremos contato para informar sobre a liberação da consulta.
+
+Para passar pela triagem se faz necessário nos enviar via WhatsApp:
+*Hemograma e o encaminhamento médico, caso tenha.*`,
+    
+  };
+
+  navigator.clipboard.writeText(textos[tipo]).then(() => {
+    alert("Texto copiado com sucesso!");
+  });
+}
+
+</script>
+
+</body>
+</html>
