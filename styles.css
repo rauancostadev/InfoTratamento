@@ -1,232 +1,150 @@
 /* ================================= */
-/* RESET */
+/* VARIÁVEIS PREMIUM */
+/* ================================= */
+
+:root {
+    --azul-profundo: #0f3057;
+    --azul-medio: #1c4b82;
+    --azul-claro: #eaf3fb;
+    --laranja-destaque: #E27559;
+    --cinza-fundo: #f4f7fb;
+    --branco: #ffffff;
+    --sombra-suave: 0 8px 25px rgba(0,0,0,0.06);
+    --sombra-hover: 0 15px 35px rgba(0,0,0,0.10);
+}
+
+/* ================================= */
+/* BASE */
 /* ================================= */
 
 body {
     margin: 0;
-    padding: 0;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    background-color: #f4f6f9;
-    color: #333;
-}
-
-h2 {
-    margin-bottom: 20px;
+    font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+    background: linear-gradient(135deg, #f4f7fb, #eef3f9);
+    color: #2c3e50;
 }
 
 /* ================================= */
-/* BOTÕES GERAIS */
-/* ================================= */
-
-.botoes-container {
-    display: block; /* corrigido */
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 10px;
-}
-
-button {
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    background-color: #E27559;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-button:hover {
-    background-color: #1a4f88;
-    transform: scale(1.03);
-}
-
-/* ================================= */
-/* NAVBAR */
+/* NAVBAR PREMIUM */
 /* ================================= */
 
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 40px;
-    background-color: #ffffff;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    position: relative;
-}
-
-.navbar-header img {
-    display: block;
-    height: 60px;
+    padding: 18px 60px;
+    backdrop-filter: blur(10px);
+    background: rgba(255,255,255,0.85);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .titulo-central {
-    font-size: 26px;
+    font-size: 24px;
     font-weight: 700;
-    color: #1a4f88;
-    text-align: center;
-    letter-spacing: 1px;
+    color: var(--azul-profundo);
+    letter-spacing: 1.5px;
     text-transform: uppercase;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
 }
 
-.titulo-central::after {
-    content: "";
-    display: block;
-    width: 50%;
-    height: 4px;
-    background-color: #E27559;
-    margin: 8px auto 0;
-    border-radius: 4px;
-}
-
+/* Links mais elegantes */
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 50px;
+    gap: 40px;
     margin: 0;
-    padding: 0;
 }
 
 .nav-links li a {
     text-decoration: none;
-    color: #1a4f88;
+    color: var(--azul-medio);
     font-weight: 600;
-    transition: 0.3s;
-}
-
-.nav-links li a:hover {
-    color: #E27559;
-}
-
-/* ================================= */
-/* RESPONSIVO NAVBAR */
-/* ================================= */
-
-@media (max-width: 900px) {
-    .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 20px;
-    }
-
-    .titulo-central {
-        position: static;
-        transform: none;
-        margin: 15px 0;
-        text-align: center;
-        width: 100%;
-    }
-
-    .nav-links {
-        flex-direction: column;
-        gap: 10px;
-        width: 100%;
-    }
-}
-
-/* ================================= */
-/* RADIOTERAPIA - HOSPITAL PREMIUM */
-/* ================================= */
-
-.radioterapia-section {
-    margin: 80px 60px;
-}
-
-.section-header {
-    margin-bottom: 40px;
-}
-
-.section-title {
-    font-size: 32px;
-    font-weight: 700;
-    color: #1a4f88;
-    margin-bottom: 8px;
-}
-
-.section-subtitle {
-    font-size: 16px;
-    color: #666;
-}
-
-/* ================================= */
-/* FILTRO PREMIUM */
-/* ================================= */
-
-.filtro-container {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 40px;
-    border-bottom: 2px solid #e5eaf1;
-    padding-bottom: 15px;
-}
-
-.filtro-btn {
-    background: none;
-    border: none;
-    font-size: 15px;
-    font-weight: 600;
-    color: #1a4f88;
-    padding: 8px 4px;
-    cursor: pointer;
     position: relative;
-    transition: 0.3s ease;
+    padding-bottom: 4px;
 }
 
-.filtro-btn::after {
+.nav-links li a::after {
     content: "";
     position: absolute;
-    bottom: -17px;
     left: 0;
+    bottom: 0;
     width: 0%;
-    height: 3px;
-    background-color: #E27559;
+    height: 2px;
+    background: var(--laranja-destaque);
     transition: 0.3s ease;
 }
 
-.filtro-btn:hover::after,
-.filtro-btn.active::after {
+.nav-links li a:hover::after {
     width: 100%;
 }
 
-.filtro-btn.active {
-    color: #E27559;
+/* ================================= */
+/* SEÇÃO */
+/* ================================= */
+
+.radioterapia-section {
+    margin: 90px auto;
+    width: 90%;
+    max-width: 1300px;
+}
+
+.section-title {
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--azul-profundo);
+}
+
+.section-subtitle {
+    color: #6c7a89;
+    margin-bottom: 50px;
 }
 
 /* ================================= */
-/* GRID MÉDICOS */
+/* GRID */
 /* ================================= */
 
 .atendimento-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 35px;
 }
 
 /* ================================= */
-/* CARD MÉDICO */
+/* CARD PREMIUM */
 /* ================================= */
 
 .medico-card {
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    background: var(--branco);
+    padding: 35px;
+    border-radius: 18px;
+    box-shadow: var(--sombra-suave);
     position: relative;
-    transition: all 0.35s ease;
+    transition: all 0.4s ease;
     border: 1px solid #eef2f7;
 }
 
+.medico-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to right, var(--azul-medio), var(--laranja-destaque));
+    border-radius: 18px 18px 0 0;
+}
+
 .medico-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+    transform: translateY(-8px);
+    box-shadow: var(--sombra-hover);
 }
 
 .medico-nome {
-    font-size: 20px;
+    font-size: 21px;
     font-weight: 600;
-    color: #1a4f88;
+    color: var(--azul-profundo);
     margin-bottom: 12px;
 }
 
@@ -237,164 +155,67 @@ button:hover {
 }
 
 .medico-info {
-    display: block;
-    margin-top: 10px;
+    display: inline-block;
+    margin-top: 15px;
     font-weight: 600;
-    color: #E27559;
+    color: var(--laranja-destaque);
 }
 
 /* ================================= */
-/* BADGES */
+/* BADGES PREMIUM */
 /* ================================= */
 
 .categoria-badge {
     position: absolute;
     top: 20px;
     right: 20px;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
-    padding: 5px 12px;
-    border-radius: 20px;
-    letter-spacing: 0.5px;
+    padding: 6px 14px;
+    border-radius: 50px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
-.categoria-badge.sus {
-    background-color: #e3f2fd;
-    color: #1a4f88;
+.sus {
+    background: #e3f2fd;
+    color: var(--azul-medio);
 }
 
-.categoria-badge.convenio {
-    background-color: #fff3e0;
-    color: #E27559;
+.convenio {
+    background: #fff3e0;
+    color: var(--laranja-destaque);
 }
 
-.categoria-badge.residentes {
-    background-color: #f3e5f5;
+.residentes {
+    background: #f3e5f5;
     color: #6a1b9a;
 }
 
 /* ================================= */
-/* UTIL */
-/* ================================= */
-
-.hidden {
-    display: none !important;
-}
-
-/* ================================= */
-/* RESPONSIVO SEÇÃO */
+/* RESPONSIVO */
 /* ================================= */
 
 @media (max-width: 768px) {
-    .radioterapia-section {
-        margin: 60px 20px;
+
+    .navbar {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
     }
 
     .section-title {
-        font-size: 24px;
+        font-size: 26px;
+        text-align: center;
     }
 
-}
-
-:root {
-    --azul-principal: #0d3b66;
-    --azul-secundario: #1d5f8c;
-    --azul-claro: #e8f4fa;
-    --vermelho: #c62828;
-    --cinza: #f4f6f9;
-    --branco: #ffffff;
-}
-
-body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: var(--cinza);
-    color: #333;
-}
-
-header {
-    background: var(--azul-principal);
-    color: white;
-    padding: 20px;
-    text-align: center;
-}
-
-header h1 {
-    margin: 0;
-}
-
-.container {
-    width: 95%;
-    max-width: 1200px;
-    margin: 30px auto;
-}
-
-.filtros {
-    background: var(--branco);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-    margin-bottom: 25px;
-}
-
-.filtros input, .filtros select {
-    padding: 10px;
-    width: 100%;
-    max-width: 300px;
-    margin: 5px 10px 5px 0;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 15px;
-}
-
-.card {
-    background: white;
-    padding: 15px;
-    border-radius: 8px;
-    border-left: 6px solid var(--azul-secundario);
-    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
-    transition: 0.2s;
-}
-
-.card:hover {
-    transform: translateY(-3px);
-}
-
-.card h3 {
-    margin: 0 0 8px 0;
-    font-size: 16px;
-    color: var(--azul-principal);
-}
-
-.card p {
-    margin: 4px 0;
-    font-size: 14px;
-}
-
-.urgencia {
-    border-left: 6px solid var(--vermelho);
-    background: #fff5f5;
-}
-
-.badge {
-    display: inline-block;
-    padding: 4px 8px;
-    font-size: 12px;
-    border-radius: 20px;
-    background: var(--azul-claro);
-    color: var(--azul-principal);
-    margin-top: 5px;
-}
-
-footer {
-    margin-top: 40px;
-    padding: 20px;
-    text-align: center;
-    background: var(--azul-principal);
-    color: white;
+    .section-subtitle {
+        text-align: center;
+    }
 }
