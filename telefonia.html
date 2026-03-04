@@ -1,1 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Telefones Hospitalares</title>
 
+</head>
+
+<body>
+
+<header>
+    <h1>📞 Lista de Telefones Hospitalares</h1>
+</header>
+
+<div class="container">
+
+    <div class="filtros">
+        <input type="text" id="busca" placeholder="Pesquisar setor ou telefone...">
+        
+        <select id="filtroUnidade">
+            <option value="todos">Todas as Unidades</option>
+            <option value="HLA">HLA</option>
+            <option value="POL">POL</option>
+            <option value="CECAN">CECAN</option>
+        </select>
+    </div>
+
+    <div class="grid" id="listaTelefones">
+
+        <!-- URGÊNCIA -->
+        <div class="card urgencia" data-unidade="POL">
+            <h3>Urgência / Pronto-Socorro</h3>
+            <p><strong>Telefone:</strong> 4009-5667</p>
+            <span class="badge">POL</span>
+        </div>
+
+        <div class="card urgencia" data-unidade="HLA">
+            <h3>Urgência / CSO</h3>
+            <p><strong>Telefone:</strong> 4009-5441</p>
+            <span class="badge">HLA</span>
+        </div>
+
+        <!-- INTERNAÇÃO -->
+        <div class="card" data-unidade="POL">
+            <h3>Centro Cirúrgico</h3>
+            <p>4009-5613</p>
+            <span class="badge">POL</span>
+        </div>
+
+        <div class="card" data-unidade="POL">
+            <h3>Internação / Cirurgias</h3>
+            <p>4009-5626 / 5943</p>
+            <span class="badge">POL</span>
+        </div>
+
+        <div class="card" data-unidade="HLA">
+            <h3>Internação</h3>
+            <p>4009-5739</p>
+            <span class="badge">HLA</span>
+        </div>
+
+        <!-- EXAMES -->
+        <div class="card" data-unidade="CECAN">
+            <h3>Entrega de Exames</h3>
+            <p>4009-5590</p>
+            <span class="badge">CECAN</span>
+        </div>
+
+        <div class="card" data-unidade="POL">
+            <h3>Entrega de Exames</h3>
+            <p>4009-5684</p>
+            <span class="badge">POL</span>
+        </div>
+
+        <div class="card" data-unidade="HLA">
+            <h3>Recepção de Imagem</h3>
+            <p>4009-5741 / 5739 / 5740</p>
+            <span class="badge">HLA</span>
+        </div>
+
+        <!-- ADMINISTRATIVO -->
+        <div class="card" data-unidade="CECAN">
+            <h3>Financeiro / Tesouraria</h3>
+            <p>4009-5632</p>
+            <span class="badge">CECAN</span>
+        </div>
+
+        <div class="card" data-unidade="CECAN">
+            <h3>Ouvidoria</h3>
+            <p>4009-5601 / 99104-6239</p>
+            <span class="badge">CECAN</span>
+        </div>
+
+        <div class="card" data-unidade="HLA">
+            <h3>Doações</h3>
+            <p>4009-5578</p>
+            <span class="badge">HLA</span>
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    Sistema Interno Hospitalar • Pesquisa Inteligente
+</footer>
+
+<script>
+
+const buscaInput = document.getElementById("busca");
+const filtroUnidade = document.getElementById("filtroUnidade");
+const cards = document.querySelectorAll(".card");
+
+function filtrar() {
+    const textoBusca = buscaInput.value.toLowerCase();
+    const unidadeSelecionada = filtroUnidade.value;
+
+    cards.forEach(card => {
+        const textoCard = card.textContent.toLowerCase();
+        const unidadeCard = card.getAttribute("data-unidade");
+
+        const correspondeBusca = textoCard.includes(textoBusca);
+        const correspondeUnidade = unidadeSelecionada === "todos" || unidadeSelecionada === unidadeCard;
+
+        if (correspondeBusca && correspondeUnidade) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+    });
+}
+
+buscaInput.addEventListener("keyup", filtrar);
+filtroUnidade.addEventListener("change", filtrar);
+
+</script>
+
+</body>
+</html>
