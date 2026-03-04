@@ -1,16 +1,4 @@
-/* ================================= */
-/* VARIÁVEIS */
-/* ================================= */
-
-:root {
-    --azul-principal: #0d3b66;
-    --azul-secundario: #1d5f8c;
-    --azul-claro: #e8f4fa;
-    --vermelho: #c62828;
-    --cinza: #f4f6f9;
-    --branco: #ffffff;
-    --laranja: #E27559;
-}
+corrija o meu codigo css
 
 /* ================================= */
 /* RESET */
@@ -20,7 +8,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Helvetica Neue', Arial, sans-serif;
-    background-color: var(--cinza);
+    background-color: #f4f6f9;
     color: #333;
 }
 
@@ -33,7 +21,7 @@ h2 {
 /* ================================= */
 
 .botoes-container {
-    display: grid; /* CORRIGIDO */
+    display: block; /* corrigido */
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 10px;
 }
@@ -42,7 +30,7 @@ button {
     padding: 10px;
     border: none;
     border-radius: 8px;
-    background-color: var(--laranja);
+    background-color: #E27559;
     color: white;
     font-weight: bold;
     cursor: pointer;
@@ -50,7 +38,7 @@ button {
 }
 
 button:hover {
-    background-color: var(--azul-secundario);
+    background-color: #1a4f88;
     transform: scale(1.03);
 }
 
@@ -63,7 +51,7 @@ button:hover {
     justify-content: space-between;
     align-items: center;
     padding: 20px 40px;
-    background-color: var(--branco);
+    background-color: #ffffff;
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     position: relative;
 }
@@ -76,7 +64,7 @@ button:hover {
 .titulo-central {
     font-size: 26px;
     font-weight: 700;
-    color: var(--azul-secundario);
+    color: #1a4f88;
     text-align: center;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -90,7 +78,7 @@ button:hover {
     display: block;
     width: 50%;
     height: 4px;
-    background-color: var(--laranja);
+    background-color: #E27559;
     margin: 8px auto 0;
     border-radius: 4px;
 }
@@ -105,13 +93,13 @@ button:hover {
 
 .nav-links li a {
     text-decoration: none;
-    color: var(--azul-secundario);
+    color: #1a4f88;
     font-weight: 600;
     transition: 0.3s;
 }
 
 .nav-links li a:hover {
-    color: var(--laranja);
+    color: #E27559;
 }
 
 /* ================================= */
@@ -129,6 +117,7 @@ button:hover {
         position: static;
         transform: none;
         margin: 15px 0;
+        text-align: center;
         width: 100%;
     }
 
@@ -140,23 +129,71 @@ button:hover {
 }
 
 /* ================================= */
-/* SEÇÃO RADIOTERAPIA */
+/* RADIOTERAPIA - HOSPITAL PREMIUM */
 /* ================================= */
 
 .radioterapia-section {
     margin: 80px 60px;
 }
 
+.section-header {
+    margin-bottom: 40px;
+}
+
 .section-title {
     font-size: 32px;
     font-weight: 700;
-    color: var(--azul-secundario);
+    color: #1a4f88;
     margin-bottom: 8px;
 }
 
 .section-subtitle {
     font-size: 16px;
     color: #666;
+}
+
+/* ================================= */
+/* FILTRO PREMIUM */
+/* ================================= */
+
+.filtro-container {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 40px;
+    border-bottom: 2px solid #e5eaf1;
+    padding-bottom: 15px;
+}
+
+.filtro-btn {
+    background: none;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a4f88;
+    padding: 8px 4px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.3s ease;
+}
+
+.filtro-btn::after {
+    content: "";
+    position: absolute;
+    bottom: -17px;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background-color: #E27559;
+    transition: 0.3s ease;
+}
+
+.filtro-btn:hover::after,
+.filtro-btn.active::after {
+    width: 100%;
+}
+
+.filtro-btn.active {
+    color: #E27559;
 }
 
 /* ================================= */
@@ -174,7 +211,7 @@ button:hover {
 /* ================================= */
 
 .medico-card {
-    background: var(--branco);
+    background: #ffffff;
     padding: 30px;
     border-radius: 16px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.06);
@@ -191,20 +228,21 @@ button:hover {
 .medico-nome {
     font-size: 20px;
     font-weight: 600;
-    color: var(--azul-secundario);
+    color: #1a4f88;
     margin-bottom: 12px;
 }
 
 .medico-turno {
     font-size: 15px;
     color: #555;
+    line-height: 1.6;
 }
 
 .medico-info {
     display: block;
     margin-top: 10px;
     font-weight: 600;
-    color: var(--laranja);
+    color: #E27559;
 }
 
 /* ================================= */
@@ -219,16 +257,17 @@ button:hover {
     font-weight: 700;
     padding: 5px 12px;
     border-radius: 20px;
+    letter-spacing: 0.5px;
 }
 
 .categoria-badge.sus {
     background-color: #e3f2fd;
-    color: var(--azul-secundario);
+    color: #1a4f88;
 }
 
 .categoria-badge.convenio {
     background-color: #fff3e0;
-    color: var(--laranja);
+    color: #E27559;
 }
 
 .categoria-badge.residentes {
@@ -256,4 +295,108 @@ button:hover {
     .section-title {
         font-size: 24px;
     }
+
+}
+
+:root {
+    --azul-principal: #0d3b66;
+    --azul-secundario: #1d5f8c;
+    --azul-claro: #e8f4fa;
+    --vermelho: #c62828;
+    --cinza: #f4f6f9;
+    --branco: #ffffff;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--cinza);
+    color: #333;
+}
+
+header {
+    background: var(--azul-principal);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+.container {
+    width: 95%;
+    max-width: 1200px;
+    margin: 30px auto;
+}
+
+.filtros {
+    background: var(--branco);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    margin-bottom: 25px;
+}
+
+.filtros input, .filtros select {
+    padding: 10px;
+    width: 100%;
+    max-width: 300px;
+    margin: 5px 10px 5px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 15px;
+}
+
+.card {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 6px solid var(--azul-secundario);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+.card h3 {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    color: var(--azul-principal);
+}
+
+.card p {
+    margin: 4px 0;
+    font-size: 14px;
+}
+
+.urgencia {
+    border-left: 6px solid var(--vermelho);
+    background: #fff5f5;
+}
+
+.badge {
+    display: inline-block;
+    padding: 4px 8px;
+    font-size: 12px;
+    border-radius: 20px;
+    background: var(--azul-claro);
+    color: var(--azul-principal);
+    margin-top: 5px;
+}
+
+footer {
+    margin-top: 40px;
+    padding: 20px;
+    text-align: center;
+    background: var(--azul-principal);
+    color: white;
 }
