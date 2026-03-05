@@ -2,6 +2,21 @@
 /* CSS */
 /* ================================= */
 
+:root {
+    --azul-principal: #0d3b66;
+    --azul-secundario: #1d5f8c;
+    --azul-claro: #e8f4fa;
+    --vermelho: #c62828;
+    --cinza: #f4f6f9;
+    --cinza-medio: #cfd8dc;
+    --cinza-escuro: #455a64;
+    --branco: #ffffff;
+    --verde-claro: #e8f5e9;
+    --laranja-claro: #fff3e0;
+    --verde: #2e7d32;
+    --laranja: #ef6c00;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -296,21 +311,6 @@ button:hover {
 
 }
 
-:root {
-    --azul-principal: #0d3b66;
-    --azul-secundario: #1d5f8c;
-    --azul-claro: #e8f4fa;
-    --vermelho: #c62828;
-    --cinza: #f4f6f9;
-    --cinza-medio: #cfd8dc;
-    --cinza-escuro: #455a64;
-    --branco: #ffffff;
-    --verde-claro: #e8f5e9;
-    --laranja-claro: #fff3e0;
-    --verde: #2e7d32;
-    --laranja: #ef6c00;
-}
-
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
@@ -382,54 +382,19 @@ header h1 {
     font-size: 14px;
 }
 
-.liga {
-    background: white;
+.card-base {
+    background: var(--branco);
     padding: 15px;
     border-radius: 8px;
-    border-left: 6px solid var(--laranja);
     box-shadow: 0 3px 8px rgba(0,0,0,0.05);
     transition: 0.2s;
 }
 
-.hla {
-    
-    background: white;
-    padding: 15px;
-    border-radius: 8px;
-    border-left: 6px solid var(--vermelho);
-    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
-    transition: 0.2s;
-}
-
-.cecan {
-    
-    background: white;
-    padding: 15px;
-    border-radius: 8px;
-    border-left: 6px solid var(--verde);
-    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
-    transition: 0.2s;
-}
-
-.pol {
-
-    background: white;
-    padding: 15px;
-    border-radius: 8px;
-    border-left: 6px solid var(--azul-secundario);
-    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
-    transition: 0.2s;
-}
-
-.hos {
-
-    background: white;
-    padding: 15px;
-    border-radius: 8px;
-    border-left: 6px solid var(--cinza-medio);
-    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
-    transition: 0.2s;
-}
+.liga { border-left: 6px solid var(--laranja); }
+.hla  { border-left: 6px solid var(--vermelho); }
+.cecan { border-left: 6px solid var(--verde); }
+.pol { border-left: 6px solid var(--azul-secundario); }
+.hos { border-left: 6px solid var(--cinza-medio); }
 
 .badge {
     display: inline-block;
@@ -448,6 +413,7 @@ footer {
     background: var(--azul-principal);
     color: white;
 }
+
 
 
 
