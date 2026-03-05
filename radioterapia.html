@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informações do Tratamento</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="./styles.css" />
 
     
 <header class="navbar">
@@ -44,6 +44,10 @@
 </header>
 
 <section class="radioterapia-section">
+
+<div class="filtros">
+  <input type="text" id="busca-medico" placeholder="Buscar médico..." />
+</div>
 
   <div class="filtro-container">
     <button class="filtro-btn active" data-filter="all">Todos</button>
@@ -270,36 +274,48 @@
     </div>
 
   </div>
+
 </section>
     
 <script>
   const botoes = document.querySelectorAll(".filtro-btn");
   const cards = document.querySelectorAll(".medico-card");
+  const buscaInput = document.getElementById("busca-medico");
 
+  function filtrarCards() {
+    const filtro = document.querySelector(".filtro-btn.active").getAttribute("data-filter");
+    const termoBusca = buscaInput.value.toLowerCase();
+
+    cards.forEach(card => {
+      const nome = card.querySelector(".medico-nome").textContent.toLowerCase();
+      const correspondeFiltro = filtro === "all" || card.getAttribute("data-category") === filtro;
+      const correspondeBusca = nome.includes(termoBusca);
+
+      if (correspondeFiltro && correspondeBusca) {
+        card.classList.remove("hidden");
+      } else {
+        card.classList.add("hidden");
+      }
+    });
+  }
+
+  // Filtro por categoria
   botoes.forEach(botao => {
     botao.addEventListener("click", () => {
-
-      // Remove active de todos
       botoes.forEach(btn => btn.classList.remove("active"));
       botao.classList.add("active");
-
-      const filtro = botao.getAttribute("data-filter");
-
-      cards.forEach(card => {
-        if (filtro === "all") {
-          card.classList.remove("hidden");
-        } else {
-          if (card.getAttribute("data-category") === filtro) {
-            card.classList.remove("hidden");
-          } else {
-            card.classList.add("hidden");
-          }
-        }
-      });
-
+      filtrarCards();
     });
   });
+
+  // Filtro por busca
+  buscaInput.addEventListener("input", () => {
+    filtrarCards();
+    
+  });
+
 </script>
+
 
 <footer>
     Liga Contra o Cancer • Central de Marcação
@@ -307,7 +323,6 @@
     
 </body>
 </html>
-
 
 
 
