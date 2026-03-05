@@ -23,21 +23,19 @@
 
     <!-- Título central -->
     <h1 class="titulo-central">Central de Marcação</h1>
+
+
+    <!-- Botão lateral -->
+<div class="side-menu-button" onclick="toggleSideMenu()">☰ Menu</div>
+
+<!-- Menu lateral -->
+<div id="side-menu" class="side-menu">
+    <a href="index.html">Home</a>
+    <a href="anotacoes.html">Anotações</a>
+    <a href="telefonia.html">Telefonia</a>
+    <a href="radioterapia.html">Agenda Radioterapia</a>
+</div>
     
-
-    <!-- Menu -->
-    <nav>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="anotacoes.html">Anotações</a></li>
-            <li><a href="telefonia.html">Telefonia</a></li>
-            <li><a href="radioterapia.html">Agenda Radioterapia</a></li>
-        </ul>
-    </nav>
-</header>
-
-<header>
-    <h1>Anotações</h1>
 </header>
 
 </head>
@@ -263,6 +261,17 @@ Para passar pela triagem, se faz necessário nos enviar via WhatsApp:
 
 </script>
 
+<script>
+function toggleSideMenu() {
+    const menu = document.getElementById('side-menu');
+    if(menu.style.right === "0px") {
+        menu.style.right = "-250px"; // fecha
+    } else {
+        menu.style.right = "0px"; // abre
+    }
+}
+</script>
+
 <footer>
     Liga Contra o Cancer • Central de Marcação
 </footer>    
@@ -270,7 +279,6 @@ Para passar pela triagem, se faz necessário nos enviar via WhatsApp:
 </body>
 
 </html>
-
 
 
 
