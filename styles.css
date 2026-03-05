@@ -382,7 +382,7 @@ header h1 {
     font-size: 14px;
 }
 
-.card-base {
+.base {
     background: var(--branco);
     padding: 15px;
     border-radius: 8px;
@@ -413,6 +413,7 @@ footer {
     background: var(--azul-principal);
     color: white;
 }
+
 
 
 
