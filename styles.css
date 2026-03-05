@@ -481,7 +481,7 @@ footer {
 
 /* Links do menu lateral */
 .side-menu a {
-    display: block;
+    display: flex;
     padding: 15px 25px;
     text-decoration: none;
     color: #1d3557;
@@ -493,4 +493,5 @@ footer {
     background-color: #a8dadc;
     color: #1d3557;
 }
+
 
