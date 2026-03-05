@@ -456,7 +456,7 @@ footer {
     position: fixed;
     top: 20px;
     left: 20px;
-    background-color: #e63946;
+    background-color: #E27559;
     color: white;
     padding: 10px 15px;
     cursor: pointer;
@@ -493,5 +493,6 @@ footer {
     background-color: #a8dadc;
     color: #1d3557;
 }
+
 
 
