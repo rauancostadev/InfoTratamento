@@ -419,6 +419,16 @@ header h1 {
     transition: 0.2s;
 }
 
+.hos {
+
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 6px solid var(--cinza);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+    transition: 0.2s;
+}
+
 .badge {
     display: inline-block;
     padding: 4px 8px;
@@ -436,6 +446,7 @@ footer {
     background: var(--azul-principal);
     color: white;
 }
+
 
 
 
