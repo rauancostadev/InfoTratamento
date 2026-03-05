@@ -394,7 +394,7 @@ header h1 {
 .hla  { border-left: 6px solid var(--vermelho); }
 .cecan { border-left: 6px solid var(--verde); }
 .pol { border-left: 6px solid var(--azul-secundario); }
-.hos { border-left: 6px solid var(--cinza-medio); }
+.hos { border-left: 6px solid var(--cinza-escuro); }
 
 .badge {
     display: inline-block;
@@ -413,6 +413,7 @@ footer {
     background: var(--azul-principal);
     color: white;
 }
+
 
 
 
