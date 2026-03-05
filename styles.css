@@ -394,8 +394,8 @@ header h1 {
 }
 
 .pol {
-    border-left: 6px solid var(--azul-principal);
-    background: #0d3b66;
+    border-left: 6px solid var(--azul-claro);
+    background: #e8f4fa;
 }
 
 .badge {
@@ -415,6 +415,7 @@ footer {
     background: var(--azul-principal);
     color: white;
 }
+
 
 
 
