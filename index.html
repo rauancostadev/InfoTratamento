@@ -23,17 +23,7 @@
 
     <!-- Título central -->
     <h1 class="titulo-central">Central de Marcação</h1>
-    
 
-    <!-- Menu -->
-    <nav>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="anotacoes.html">Anotações</a></li>
-            <li><a href="telefonia.html">Telefonia</a></li>
-            <li><a href="radioterapia.html">Agenda Radioterapia</a></li>
-        </ul>
-    </nav>
 
     <!-- Botão lateral -->
 <div class="side-menu-button" onclick="toggleSideMenu()">☰ Menu</div>
@@ -81,10 +71,10 @@
 <script>
 function toggleSideMenu() {
     const menu = document.getElementById('side-menu');
-    if(menu.style.left === "0px") {
-        menu.style.left = "-250px"; // fecha
+    if(menu.style.right === "0px") {
+        menu.style.right = "-250px"; // fecha
     } else {
-        menu.style.left = "0px"; // abre
+        menu.style.right = "0px"; // abre
     }
 }
 </script>
@@ -96,7 +86,6 @@ function toggleSideMenu() {
 </body>
     
 </html>
-
 
 
 
