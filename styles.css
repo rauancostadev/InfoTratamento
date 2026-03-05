@@ -305,6 +305,8 @@ button:hover {
     --branco: #ffffff;
     --verde-claro: #e8f5e9;
     --laranja-claro: #fff3e0;
+    --verde: #2e7d32;
+    --laranja: #ef6c00;
 }
 
 body {
@@ -381,37 +383,40 @@ header h1 {
 }
 
 .liga {
-    border-left: 6px solid var(--laranja-claro);
-    background: #fff3e0;
+    background: white;
     padding: 15px;
     border-radius: 8px;
+    border-left: 6px solid var(--laranja);
     box-shadow: 0 3px 8px rgba(0,0,0,0.05);
     transition: 0.2s;
 }
 
 .hla {
-    border-left: 6px solid var(--vermelho);
-    background: #fff5f5;
+    
+    background: white;
     padding: 15px;
     border-radius: 8px;
+    border-left: 6px solid var(--vermelho);
     box-shadow: 0 3px 8px rgba(0,0,0,0.05);
     transition: 0.2s;
 }
 
 .cecan {
-    border-left: 6px solid var(--verde-claro);
-    background: #e8f5e9;
+    
+    background: white;
     padding: 15px;
     border-radius: 8px;
+    border-left: 6px solid var(--verde);
     box-shadow: 0 3px 8px rgba(0,0,0,0.05);
     transition: 0.2s;
 }
 
 .pol {
-    border-left: 6px solid var(--azul-claro);
-    background: #e8f4fa;
+
+    background: white;
     padding: 15px;
     border-radius: 8px;
+    border-left: 6px solid var(--azul);
     box-shadow: 0 3px 8px rgba(0,0,0,0.05);
     transition: 0.2s;
 }
@@ -433,6 +438,7 @@ footer {
     background: var(--azul-principal);
     color: white;
 }
+
 
 
 
