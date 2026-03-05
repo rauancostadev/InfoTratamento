@@ -414,7 +414,7 @@ header h1 {
     background: white;
     padding: 15px;
     border-radius: 8px;
-    border-left: 6px solid var(--azul);
+    border-left: 6px solid var(--azul-secundario);
     box-shadow: 0 3px 8px rgba(0,0,0,0.05);
     transition: 0.2s;
 }
@@ -436,6 +436,7 @@ footer {
     background: var(--azul-principal);
     color: white;
 }
+
 
 
 
