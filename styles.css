@@ -302,6 +302,8 @@ button:hover {
     --azul-claro: #e8f4fa;
     --vermelho: #c62828;
     --cinza: #f4f6f9;
+    --cinza-medio: #cfd8dc;
+    --cinza-escuro: #455a64;
     --branco: #ffffff;
     --verde-claro: #e8f5e9;
     --laranja-claro: #fff3e0;
@@ -424,7 +426,7 @@ header h1 {
     background: white;
     padding: 15px;
     border-radius: 8px;
-    border-left: 6px solid var(--cinza);
+    border-left: 6px solid var(--cinza-medio);
     box-shadow: 0 3px 8px rgba(0,0,0,0.05);
     transition: 0.2s;
 }
@@ -446,6 +448,7 @@ footer {
     background: var(--azul-principal);
     color: white;
 }
+
 
 
 
