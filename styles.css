@@ -450,3 +450,71 @@ footer {
 .atalho-card:hover{
     transform:translateY(-5px);
 }
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex; /* para que sidebar e conteúdo fiquem lado a lado */
+}
+
+/* Cabeçalho superior */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    z-index: 1000;
+}
+
+.titulo-central {
+    flex: 1;
+    text-align: center;
+}
+
+/* Menu lateral */
+.sidebar {
+    position: fixed;
+    top: 70px; /* altura do header */
+    left: 0;
+    width: 200px;
+    height: calc(100% - 70px);
+    background-color: #333;
+    padding-top: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar li {
+    margin: 10px 0;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    display: block;
+    transition: background 0.3s;
+}
+
+.sidebar a:hover {
+    background-color: #555;
+}
+
+/* Conteúdo principal */
+.content {
+    margin-left: 200px; /* desloca conteúdo para não ficar atrás da sidebar */
+    padding: 90px 20px 20px 20px; /* leva em conta altura do header */
+}
