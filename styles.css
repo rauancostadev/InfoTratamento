@@ -303,8 +303,8 @@ button:hover {
     --vermelho: #c62828;
     --cinza: #f4f6f9;
     --branco: #ffffff;
-    --verde: #2e7d32;
-    --laranja: #ef6c00;
+    --verde-claro: #e8f5e9;
+    --laranja-claro: #fff3e0;
 }
 
 body {
@@ -379,8 +379,8 @@ header h1 {
 }
 
 .liga {
-    border-left: 6px solid var(--laranja);
-    background: #ef6c00;
+    border-left: 6px solid var(--laranja-claro);
+    background: #fff3e0;
 }
 
 .hla {
@@ -389,8 +389,8 @@ header h1 {
 }
 
 .cecan {
-    border-left: 6px solid var(--verde);
-    background: #2e7d32;
+    border-left: 6px solid var(--verde-claro);
+    background: #e8f5e9;
 }
 
 .pol {
@@ -415,6 +415,7 @@ footer {
     background: var(--azul-principal);
     color: white;
 }
+
 
 
 
