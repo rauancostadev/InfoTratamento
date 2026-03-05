@@ -383,7 +383,6 @@ header h1 {
 .liga {
     border-left: 6px solid var(--laranja-claro);
     background: #fff3e0;
-    background: #e8f5e9;
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 3px 8px rgba(0,0,0,0.05);
@@ -393,7 +392,6 @@ header h1 {
 .hla {
     border-left: 6px solid var(--vermelho);
     background: #fff5f5;
-    background: #e8f5e9;
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 3px 8px rgba(0,0,0,0.05);
@@ -435,6 +433,7 @@ footer {
     background: var(--azul-principal);
     color: white;
 }
+
 
 
 
