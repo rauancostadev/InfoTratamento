@@ -454,34 +454,34 @@ footer {
 /* Botão lateral fixo */
 .side-menu-button {
     position: fixed;
-    top: 20px;
-    left: 20px;
+    top: 30px;
+    right: 30px;
     background-color: #E27559;
     color: white;
     padding: 10px 15px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 10px;
     z-index: 1001;
-    font-size: 18px;
+    font-size: 15px;
 }
 
 /* Menu lateral escondido inicialmente */
 .side-menu {
     position: fixed;
     top: 0;
-    left: -250px; /* escondido fora da tela */
+    right: -250px; /* escondido fora da tela */
     width: 250px;
     height: 100%;
-    background-color: #f1faee;
-    padding-top: 60px;
-    transition: left 0.3s ease;
+    background-color: white;
+    padding-top: 100px;
+    transition: right 0.3s ease;
     box-shadow: 2px 0 5px rgba(0,0,0,0.3);
     z-index: 1000;
 }
 
 /* Links do menu lateral */
 .side-menu a {
-    display: flex;
+    display: block;
     padding: 15px 25px;
     text-decoration: none;
     color: #1d3557;
@@ -493,6 +493,3 @@ footer {
     background-color: #a8dadc;
     color: #1d3557;
 }
-
-
-
