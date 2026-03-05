@@ -23,17 +23,19 @@
 
     <!-- Título central -->
     <h1 class="titulo-central">Central de Marcação</h1>
-    
 
-    <!-- Menu -->
-    <nav>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="anotacoes.html">Anotações</a></li>
-            <li><a href="telefonia.html">Telefonia</a></li>
-            <li><a href="radioterapia.html">Agenda Radioterapia</a></li>
-        </ul>
-    </nav>
+
+    <!-- Botão lateral -->
+<div class="side-menu-button" onclick="toggleSideMenu()">☰ Menu</div>
+
+<!-- Menu lateral -->
+<div id="side-menu" class="side-menu">
+    <a href="index.html">Home</a>
+    <a href="anotacoes.html">Anotações</a>
+    <a href="telefonia.html">Telefonia</a>
+    <a href="radioterapia.html">Agenda Radioterapia</a>
+</div>
+    
 </header>
 
 </head>
@@ -53,7 +55,7 @@
     <button class="filtro-btn active" data-filter="all">Todos</button>
     <button class="filtro-btn" data-filter="sus">SUS</button>
     <button class="filtro-btn" data-filter="convenio">Convênio</button>
-    <button class="filtro-btn" data-filter="residentes">Residente</button>
+    <button class="filtro-btn" data-filter="residentes">Residentes</button>
   </div>
 
   <div class="atendimento-grid">
@@ -316,6 +318,17 @@
 
 </script>
 
+<script>
+function toggleSideMenu() {
+    const menu = document.getElementById('side-menu');
+    if(menu.style.right === "0px") {
+        menu.style.right = "-250px"; // fecha
+    } else {
+        menu.style.right = "0px"; // abre
+    }
+}
+</script>
+
 
 <footer>
     Liga Contra o Cancer • Central de Marcação
@@ -323,9 +336,6 @@
     
 </body>
 </html>
-
-
-
 
 
 
