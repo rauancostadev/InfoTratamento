@@ -365,8 +365,6 @@ header h1 {
     transition: 0.2s;
 }
 
-
-
 .card:hover {
     transform: translateY(-3px);
 }
@@ -438,6 +436,7 @@ footer {
     background: var(--azul-principal);
     color: white;
 }
+
 
 
 
