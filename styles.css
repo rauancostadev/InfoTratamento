@@ -303,6 +303,8 @@ button:hover {
     --vermelho: #c62828;
     --cinza: #f4f6f9;
     --branco: #ffffff;
+    --verde: #2e7d32;
+    --laranja: #ef6c00;
 }
 
 body {
@@ -376,9 +378,24 @@ header h1 {
     font-size: 14px;
 }
 
-.urgencia {
+.liga {
+    border-left: 6px solid var(--laranja);
+    background: #ef6c00;
+}
+
+.hla {
     border-left: 6px solid var(--vermelho);
     background: #fff5f5;
+}
+
+.cecan {
+    border-left: 6px solid var(--verde);
+    background: #2e7d32;
+}
+
+.pol {
+    border-left: 6px solid var(--azul-principal);
+    background: #0d3b66;
 }
 
 .badge {
@@ -398,5 +415,6 @@ footer {
     background: var(--azul-principal);
     color: white;
 }
+
 
 
