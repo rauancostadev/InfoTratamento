@@ -5,23 +5,28 @@
 :root {
     --azul-principal: #0d3b66;
     --azul-secundario: #1d5f8c;
-    --azul-claro: #e8f4fa;
     --vermelho: #c62828;
     --cinza: #f4f6f9;
     --cinza-medio: #cfd8dc;
     --cinza-escuro: #455a64;
     --branco: #ffffff;
     --verde-claro: #e8f5e9;
-    --laranja-claro: #fff3e0;
+    --roxo: #6a1b9a;
     --verde: #2e7d32;
-    --laranja: #ef6c00;
+    --laranja: #CC5500;
+    --cinza-preto: #1f1f1f;
+    --azul: #1a4f88;
+    --azul-claro: #e3f2fd;
+    --laranja-claro: #fff3e0;
+    --roxo-claro: #f3e5f5;
+    
 }
 
 body {
     margin: 0;
     padding: 0;
     font-family: 'Helvetica Neue', Arial, sans-serif;
-    background-color: #f4f6f9;
+    background-color: var(--cinza);
     color: #333;
 }
 
@@ -43,7 +48,7 @@ button {
     padding: 10px;
     border: none;
     border-radius: 8px;
-    background-color: #E27559;
+    background-color: #CC5500;
     color: white;
     font-weight: bold;
     cursor: pointer;
@@ -91,7 +96,7 @@ button:hover {
     display: block;
     width: 50%;
     height: 4px;
-    background-color: #E27559;
+    background-color: #CC5500;
     margin: 8px auto 0;
     border-radius: 4px;
 }
@@ -112,7 +117,7 @@ button:hover {
 }
 
 .nav-links li a:hover {
-    color: #E27559;
+    color: #CC5500;
 }
 
 /* ================================= */
@@ -156,7 +161,7 @@ button:hover {
 .section-title {
     font-size: 32px;
     font-weight: 700;
-    color: #1a4f88;
+    color: #CC5500;
     margin-bottom: 8px;
 }
 
@@ -196,7 +201,7 @@ button:hover {
     left: 0;
     width: 0%;
     height: 3px;
-    background-color: #E27559;
+    background-color: #CC5500;
     transition: 0.3s ease;
 }
 
@@ -206,7 +211,7 @@ button:hover {
 }
 
 .filtro-btn.active {
-    color: #E27559;
+    color: #CC5500;
 }
 
 /* ================================= */
@@ -215,7 +220,7 @@ button:hover {
 
 .atendimento-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
     gap: 30px;
 }
 
@@ -255,7 +260,7 @@ button:hover {
     display: block;
     margin-top: 10px;
     font-weight: 600;
-    color: #E27559;
+    color: #CC5500;
 }
 
 /* ================================= */
@@ -280,7 +285,7 @@ button:hover {
 
 .categoria-badge.convenio {
     background-color: #fff3e0;
-    color: #E27559;
+    color: #CC5500;
 }
 
 .categoria-badge.residentes {
@@ -309,13 +314,6 @@ button:hover {
         font-size: 24px;
     }
 
-}
-
-body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: var(--cinza);
-    color: #333;
 }
 
 header {
@@ -395,6 +393,9 @@ header h1 {
 .cecan { border-left: 6px solid var(--verde); }
 .pol { border-left: 6px solid var(--azul-secundario); }
 .hos { border-left: 6px solid var(--cinza-medio); }
+.azul { border-left: 6px solid var(--azul); }
+.laranja { border-left: 6px solid var(--laranja); }
+.roxo { border-left: 6px solid var(--roxo); }
 
 .badge {
     display: inline-block;
@@ -412,6 +413,7 @@ footer {
     text-align: center;
     background: var(--azul-principal);
     color: white;
+    font-size: 15px;
 }
 
 .hero{
@@ -492,4 +494,98 @@ footer {
 .side-menu a:hover {
     background-color: #a8dadc;
     color: #1d3557;
+}
+
+
+.search{
+padding:8px 12px;
+border-radius:6px;
+border:none;
+}
+
+.container{
+padding:25px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:20px;
+}
+
+.card{
+background:white;
+border-radius:10px;
+padding:18px;
+box-shadow:0 3px 8px rgba(0,0,0,0.08);
+transition:.2s;
+}
+
+.card:hover{
+transform:translateY(-4px);
+}
+
+.card h2{
+font-size:16px;
+color:#34495e;
+margin-bottom:10px;
+}
+
+.card ul{
+list-style:none;
+}
+
+.card li{
+padding:6px;
+cursor:pointer;
+border-radius:4px;
+}
+
+.card li:hover{
+background:#eef4ff;
+}
+
+.count{
+font-size:12px;
+color:#777;
+margin-bottom:8px;
+}
+
+.hidden{
+display:none;
+}
+
+/* página médico */
+
+.profile{
+max-width:700px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:10px;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+
+.profile h2{
+margin-bottom:10px;
+}
+
+.badge1 {
+display:inline-block;
+background: var(--azul-principal);
+color:white;
+padding:6px 10px;
+border-radius:6px;
+margin:5px 5px 0 0;
+font-size:13px;
+}
+
+.back{
+margin-bottom:20px;
+background: var(--azul-principal);
+color:white;
+border:none;
+padding:8px 14px;
+border-radius:6px;
+cursor:pointer;
 }
