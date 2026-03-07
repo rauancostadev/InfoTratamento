@@ -38,6 +38,8 @@
     
 </header>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 <body>
 
@@ -258,21 +260,41 @@ Para passar pela triagem, se faz necessário nos enviar via WhatsApp:
     
   };
 
-  navigator.clipboard.writeText(textos[tipo]).then(() => {
-        alert("Texto copiado com sucesso!");
-  });
+  if(!textos[tipo]){
+
+Swal.fire({
+icon:"error",
+title:"Texto não encontrado"
+});
+
+return;
+
 }
 
-</script>
+navigator.clipboard.writeText(textos[tipo])
 
-<script>
-function toggleSideMenu() {
-    const menu = document.getElementById('side-menu');
-    if(menu.style.right === "0px") {
-        menu.style.right = "-250px"; // fecha
-    } else {
-        menu.style.right = "0px"; // abre
-    }
+.then(()=>{
+
+Swal.fire({
+toast:true,
+position:'top-middle',
+icon:'success',
+title:'Texto copiado!',
+showConfirmButton:false,
+timer:2000
+});
+
+})
+
+.catch(()=>{
+
+Swal.fire({
+icon:'error',
+title:'Erro ao copiar'
+});
+
+});
+
 }
 </script>
 
@@ -283,6 +305,7 @@ function toggleSideMenu() {
 </body>
 
 </html>
+
 
 
 
