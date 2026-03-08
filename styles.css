@@ -589,3 +589,20 @@ padding:8px 14px;
 border-radius:6px;
 cursor:pointer;
 }
+
+.card li{
+font-size:15px;
+font-weight:600;
+background:#f4f6ff;
+padding:6px 10px;
+border-radius:6px;
+margin:6px 0;
+cursor:pointer;
+transition:0.2s;
+}
+
+.card li:hover{
+background:#e1e7ff;
+transform:scale(1.03);
+}
+
