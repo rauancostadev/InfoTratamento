@@ -11,7 +11,6 @@
 
 <!-- Cabeçalho / Navbar -->
 <header class="navbar">
-    <!-- Logo -->
     <div class="navbar-header">
         <a class="navbar-brand" 
            href="https://rauancostadev.github.io/InfoTratamento/index.html"
@@ -21,14 +20,8 @@
                  title="Liga Contra o Câncer">
         </a>
     </div>
-
-    <!-- Título central -->
     <h1 class="titulo-central">Central de Marcação</h1>
-
-    <!-- Botão lateral -->
     <div class="side-menu-button" onclick="toggleSideMenu()">☰ Menu</div>
-
-    <!-- Menu lateral -->
     <div id="side-menu" class="side-menu">
         <a href="index.html">Início</a>
         <a href="oncologia.html">Oncologia Clínica</a>
@@ -38,7 +31,6 @@
     </div>
 </header>
 
-<!-- Conteúdo principal -->
 <header>
     <h1>Oncologia Clínica</h1>
 </header>
@@ -62,7 +54,6 @@
     </div>
 </div>
 
-<!-- Grafo interativo Vis.js -->
 <h2>Rede de Especialistas</h2>
 <div id="network" style="height:500px;border:1px solid #ddd;border-radius:10px;margin-bottom:20px;"></div>
 
@@ -145,7 +136,7 @@ document.getElementById("search").addEventListener("input",e=>{
 
 renderTumors();
 
-// --- Vis.js ---
+// --- Vis.js avançado ---
 function renderNetwork(){
     const nodes = [];
     const edges = [];
@@ -155,23 +146,75 @@ function renderNetwork(){
         tumorSet.add(tumor);
         doctors.forEach(doc=>doctorSet.add(doc));
     });
-    tumorSet.forEach(t=>nodes.push({id:t,label:t,group:"tumor",shape:"box"}));
-    doctorSet.forEach(d=>nodes.push({id:d,label:d,group:"doctor",shape:"dot",size:15}));
+    tumorSet.forEach(t=>nodes.push({id:t,label:t,group:"tumor",shape:"box", color:{border:"#FF9800", background:"#FFECB3"}}));
+    doctorSet.forEach(d=>nodes.push({id:d,label:d,group:"doctor",shape:"dot",size:15, color:{border:"#4CAF50", background:"#C8E6C9"}}));
     Object.entries(data).forEach(([tumor, doctors])=>{
         doctors.forEach(doc=>edges.push({from:doc, to:tumor}));
     });
+
     const container = document.getElementById("network");
     const network = new vis.Network(container, {
         nodes: new vis.DataSet(nodes),
         edges: new vis.DataSet(edges)
     },{
         physics: {stabilization: false},
-        groups: {doctor:{color:"#4CAF50"}, tumor:{color:"#FF9800"}}
+        groups: {doctor:{color:{border:"#4CAF50", background:"#C8E6C9"}}, tumor:{color:{border:"#FF9800", background:"#FFECB3"}}}
     });
+
+    function resetCardsAndNodes(){
+        document.querySelectorAll(".card").forEach(card=>card.style.display="block");
+        document.querySelectorAll(".card li").forEach(li=>li.style.display="block");
+        network.body.data.nodes.update(
+            nodes.map(n => {
+                if(n.group==="doctor") return {...n, color:{border:"#4CAF50", background:"#C8E6C9"}};
+                else return {...n, color:{border:"#FF9800", background:"#FFECB3"}};
+            })
+        );
+    }
+
     network.on("click", params=>{
-        if(params.nodes.length>0){
-            const nodeId = params.nodes[0];
-            alert("Selecionado: " + nodeId);
+        resetCardsAndNodes();
+        if(params.nodes.length===0) return;
+
+        const nodeId = params.nodes[0];
+        const node = nodes.find(n => n.id===nodeId);
+
+        if(node.group==="tumor"){
+            document.querySelectorAll(".card").forEach(card=>{
+                card.style.display = card.querySelector("h2").textContent === nodeId ? "block" : "none";
+            });
+            const doctors = data[nodeId];
+            network.body.data.nodes.update(
+                nodes.map(n => {
+                    if(n.group==="doctor" && doctors.includes(n.id)){
+                        return {...n, color:{border:"#FF5722", background:"#FFCCBC"}};
+                    }
+                    else if(n.group==="tumor" && n.id===nodeId){
+                        return {...n, color:{border:"#FF9800", background:"#FFE082"}};
+                    }
+                    return n;
+                })
+            );
+        }
+
+        if(node.group==="doctor"){
+            document.querySelectorAll(".card").forEach(card=>{
+                card.querySelectorAll("li").forEach(li=>{
+                    li.style.display = li.textContent.includes(nodeId) ? "block" : "none";
+                });
+            });
+            const tumors = Object.entries(data).filter(([t,dlist])=>dlist.includes(nodeId)).map(([t])=>t);
+            network.body.data.nodes.update(
+                nodes.map(n=>{
+                    if(n.group==="tumor" && tumors.includes(n.id)){
+                        return {...n, color:{border:"#4CAF50", background:"#C8E6C9"}};
+                    }
+                    else if(n.group==="doctor" && n.id===nodeId){
+                        return {...n, color:{border:"#FF5722", background:"#FFCCBC"}};
+                    }
+                    return n;
+                })
+            );
         }
     });
 }
@@ -185,9 +228,9 @@ renderNetwork();
 function toggleSideMenu() {
     const menu = document.getElementById('side-menu');
     if(menu.style.right === "0px") {
-        menu.style.right = "-250px"; // fecha
+        menu.style.right = "-250px";
     } else {
-        menu.style.right = "0px"; // abre
+        menu.style.right = "0px";
     }
 }
 </script>
