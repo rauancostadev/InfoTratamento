@@ -253,12 +253,12 @@ button:hover {
 .medico-turno {
     font-size: 15px;
     color: #555;
-    line-height: 1.6;
+    line-height: 1.3;
 }
 
 .medico-info {
     display: block;
-    margin-top: 10px;
+    margin-top: 2px;
     font-weight: 600;
     color: #CC5500;
 }
@@ -605,4 +605,5 @@ transition:0.2s;
 background:#e1e7ff;
 transform:scale(1.03);
 }
+
 
