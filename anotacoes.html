@@ -84,15 +84,15 @@
 
 <h3>Informações 1ª Vez</h3>
 <div class="botoes-container">
-<button onclick="copiarTexto('1°hematoconvenio')">Hematologia Convênio</button>
-<button onclick="copiarTexto('1°hematosus')">Hematologia SUS</button>
-<button onclick="copiarTexto('1°hematoparticular')">Hematologia Particular</button>
-<button onclick="copiarTexto('1°oncoconvenio')">Oncologia Convênio</button>
-<button onclick="copiarTexto('1°oncosus')">Oncologia SUS</button>
-<button onclick="copiarTexto('1°oncoparticular')">Oncologia Particular</button>
-<button onclick="copiarTexto('1°radioconvenio')">Radioterapia Convênio</button>
-<button onclick="copiarTexto('1°radiosus')">Radioterapia SUS</button>
-<button onclick="copiarTexto('1°radioparticular')">Radioterapia Particular</button>
+<button onclick="copiarTexto('hematoconvenio')">Hematologia Convênio</button>
+<button onclick="copiarTexto('hematosus')">Hematologia SUS</button>
+<button onclick="copiarTexto('hematoparticular')">Hematologia Particular</button>
+<button onclick="copiarTexto('oncoconvenio')">Oncologia Convênio</button>
+<button onclick="copiarTexto('oncosus')">Oncologia SUS</button>
+<button onclick="copiarTexto('oncoparticular')">Oncologia Particular</button>
+<button onclick="copiarTexto('radioconvenio')">Radioterapia Convênio</button>
+<button onclick="copiarTexto('radiosus')">Radioterapia SUS</button>
+<button onclick="copiarTexto('radioparticular')">Radioterapia Particular</button>
 
 <h3>Preparos das Consultas</h3>
 <div class="botoes-container">
@@ -298,7 +298,18 @@ Em casos de urgências ou mostrar exames, poderá vir presencialmente na unidade
 
 Segunda à sexta
 *Horário de atendimento:* 08:00 às 16:00`,
-    
+
+    hematoconvenio: `Atendimentos por convênio com a hematologia, se faz necessário passar por uma triagem online. Nesta triagem solicitamos o resultado do *hemograma* ou *biópsia* e, caso tenha, o *encaminhamento médico*. Após a análise dos médicos, a consulta poderá ser liberada.`,
+    hematosus: `Atendimentos pelo SUS com a hematologia, se faz necessário passar por uma triagem online. Nesta triagem solicitamos o resultado da *biópsia* e, caso tenha, o *encaminhamento médico*. Após a análise dos médicos, a consulta poderá ser liberada.`,
+    hematoparticular: `A consulta hematologista tem o valor de R$ 450,00, pode parcelar em ate 6 vezes e o paciente tem direito ao retorno de ate 45 dias`,
+      
+    oncoconvenio: `Atendimentos por convênio com a oncologia clínica, se faz necessário passar por uma triagem online. Nesta triagem solicitamos o resultado dos *exames de imagem* ou *biópsia* e, caso tenha, o *encaminhamento médico*. Após a análise dos médicos, a consulta poderá ser liberada.`,
+    oncosus: `Atendimentos pelo SUS com a oncologia clínica, se faz necessário passar por uma triagem online. Nesta triagem solicitamos o resultado dos *exames de imagem* ou *biópsia* e, caso tenha, o *encaminhamento médico*. Após a análise dos médicos, a consulta poderá ser liberada.`,
+    oncoparticular: `Atendimentos particular com a oncologia clínica, se faz necessário passar por uma triagem online. Nesta triagem solicitamos o resultado dos *exames de imagem* ou *biópsia* e, caso tenha, o *encaminhamento médico*. Após a análise dos médicos, a consulta poderá ser liberada.`,
+      
+    radioconvenio: `Atendimentos com médicos radioterapeuta se faz necessário nos enviar o resultado da *biópsia* e *encaminhamento médico* para passar pela triagem online. Após a análise dos médicos, a consulta poderá ser liberada.`,
+    radiosus: `Atendimentos pelo SUS com médicos radioterapeuta se faz necessário nos enviar o resultado da *biópsia* e *encaminhamento médico* para passar pela triagem online. Após a análise dos médicos, a consulta poderá ser liberada.`,
+    radioparticular: `Solicitar no grupo de 1° vez da radioterapia, portando apenas o *encaminhamento médico*.`,
   };
 
   if(!textos[tipo]){
