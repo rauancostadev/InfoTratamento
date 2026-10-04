@@ -156,7 +156,7 @@ h1,h2,h3{line-height:1.2}
 .s-ico{width:56px;height:56px;border-radius:15px;display:grid;place-items:center;font-size:1.8rem;background:var(--bg-c)}
 .shortcut h2{margin:0;font-size:1.15rem;font-weight:800;color:var(--navy)}
 .shortcut p{margin:0;color:var(--muted);font-size:.9rem}
-.shortcut .go{margin-top:auto;font-weight:800;font-size:.85rem;color:var(--c);display:inline-flex;gap:6px}
+.shortcut .go{margin-top:auto;font-weight:800;font-size:.85rem;color:var(--navy);display:inline-flex;gap:6px}
 .shortcut .go span{transition:.25s}
 .shortcut:hover .go span{transform:translateX(5px)}
 .tip{width:100%;max-width:1280px;margin:26px auto 0;padding:0 5%;color:var(--muted);font-size:.85rem;font-weight:600;text-align:center}
