@@ -151,7 +151,7 @@ h1,h2,h3{line-height:1.2}
 /* ===================== PÁGINA INICIAL ===================== */
 .shortcuts{width:100%;max-width:1280px;margin:-56px auto 0;padding:0 5%;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;position:relative;z-index:5}
 .shortcut{display:flex;flex-direction:column;gap:14px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px 22px;text-decoration:none;box-shadow:var(--shadow);transition:.25s;position:relative;overflow:hidden}
-.shortcut::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:var(--c)}
+.shortcut::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:var(--navy, #0d3b66)}
 .shortcut:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
 .s-ico{width:56px;height:56px;border-radius:15px;display:grid;place-items:center;font-size:1.8rem;background:var(--bg-c)}
 .shortcut h2{margin:0;font-size:1.15rem;font-weight:800;color:var(--navy)}
