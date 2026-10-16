@@ -10,10 +10,11 @@
     { id: 'index',            href: 'index.html',            label: 'Início',            ico: '🏠' },
     { id: 'oncologia',        href: 'oncologia.html',        label: 'Oncologia Clínica', ico: '♋' },
     { id: 'quimioterapia',    href: 'quimioterapia.html',    label: 'Quimioterapia',     ico: '💉' },
-    { id: 'radioterapia',     href: 'radioterapia.html',     label: 'Radioterapia',      ico: '☢️' },
+    { id: 'radioterapia',     href: 'radioterapia.html',     label: 'Radioterapia',      ico: '☢️' },          
     { id: 'ultrassonografia', href: 'ultrassonografia.html', label: 'Ultrassonografia',  ico: '📺' },
-    { id: 'anotacoes',        href: 'anotacoes.html',        label: 'Respostas Rápidas', ico: '📋' },
-    { id: 'telefonia',        href: 'telefonia.html',        label: 'Telefonia',         ico: '☎️' }
+    { id: 'anotacoes',        href: 'anotacoes.html',        label: 'Anotações',         ico: '📋' },
+    { id: 'telefonia',        href: 'telefonia.html',        label: 'Telefonia',         ico: '☎️' },
+    { id: 'painel',           href: 'painel.html',           label: 'Painel de Controle', ico: '⚙️' }
   ];
 
   var LOGO = 'https://ligacontraocancer.com.br/wp-content/themes/v01/assets/img/build/liga-contra-o-cancer-footer-red.f7f3067c.png';
@@ -38,13 +39,15 @@
     '<header class="topbar">' +
       '<a href="index.html" title="Início"><img src="' + LOGO + '" alt="Liga Contra o Câncer"></a>' +
       '<div class="brand-title">Central de Marcação</div>' +
+      '<button class="tema-btn" id="temaBtn" type="button" aria-label="Alternar tema claro/escuro"></button>' +
+      '<a class="user-btn" id="userBtn" href="painel.html" title="Painel de Controle">⚙️ <span>Painel</span></a>' +
       '<button class="menu-btn" id="menuBtn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="sideMenu">☰ Menu</button>' +
     '</header>' +
     '<nav class="side-menu" id="sideMenu" aria-label="Menu principal">' + links + '</nav>' +
     '<div class="overlay" id="overlay"></div>');
 
   document.body.insertAdjacentHTML('beforeend',
-    '<footer class="footer">Liga Contra o Câncer • Central de Marcação</footer>' +
+    '<footer class="footer">Liga Contra o Câncer • Central de Marcação • <a href="painel.html">Painel de Controle</a></footer>' +
     '<div class="toast" id="toast" role="status" aria-live="polite"></div>');
 
   var menu = document.getElementById('sideMenu');
@@ -90,6 +93,23 @@
     var h = new Date().getHours();
     return h < 12 ? 'Bom dia' : h < 18 ? 'Boa tarde' : 'Boa noite';
   };
+
+  /* ---------- tema claro / escuro (vale para todas as páginas e fica salvo neste navegador) ---------- */
+  UI.tema = {
+    onChange: null,
+    get: function () { return document.documentElement.getAttribute('data-tema') === 'dark' ? 'dark' : 'light'; },
+    set: function (t, silent) {
+      var dark = t === 'dark';
+      if (dark) document.documentElement.setAttribute('data-tema', 'dark'); else document.documentElement.removeAttribute('data-tema');
+      try { localStorage.setItem('an_tema', dark ? 'dark' : 'light'); } catch (e) {}
+      var b = document.getElementById('temaBtn');
+      if (b) { b.textContent = dark ? '☀️' : '🌙'; b.title = dark ? 'Mudar para tema claro' : 'Mudar para tema escuro'; }
+      if (!silent && typeof UI.tema.onChange === 'function') UI.tema.onChange(dark ? 'dark' : 'light');
+    },
+    toggle: function () { UI.tema.set(UI.tema.get() === 'dark' ? 'light' : 'dark'); }
+  };
+  document.getElementById('temaBtn').addEventListener('click', UI.tema.toggle);
+  UI.tema.set(UI.tema.get(), true);
 
   UI.store = {
     get: function (k, d) { try { var v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
@@ -165,6 +185,16 @@
     modalEl.classList.remove('show');
     if (lastFocus && lastFocus.focus) lastFocus.focus();
   };
+
+  /* ---------- avisos da gestão em todas as páginas ----------
+     As páginas Anotações e Painel carregam o core.js sozinhas. Nas demais, ele só é carregado
+     se a pessoa entrou na conta neste navegador (para receber avisos e mostrar o nome no topo). */
+  if (current !== 'anotacoes' && current !== 'painel' && UI.store.get('an_logado', false)) {
+    var cs = document.createElement('script');
+    cs.src = 'core.js';
+    cs.onload = function () { if (window.Core) window.Core.init({ allowCreate: false }); };
+    document.head.appendChild(cs);
+  }
 
   /* ---------- atalhos de teclado ---------- */
   document.addEventListener('keydown', function (e) {
