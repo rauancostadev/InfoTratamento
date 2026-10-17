@@ -199,7 +199,7 @@ service cloud.firestore {
         && request.resource.data.criadoEm == request.time
         && request.resource.data.nome is string && request.resource.data.nome.size() >= 3 && request.resource.data.nome.size() <= 120
         && request.resource.data.medico is string && request.resource.data.medico.size() <= 120
-        && (!('medicoEspecialidade' in request.resource.data) || (request.resource.data.medicoEspecialidade is string && request.resource.data.medicoEspecialidade.size() <= 80))
+        && request.resource.data.medicoEspecialidade is string && request.resource.data.medicoEspecialidade.size() >= 2 && request.resource.data.medicoEspecialidade.size() <= 80
         && (!('medicoCrm' in request.resource.data) || (request.resource.data.medicoCrm is string && request.resource.data.medicoCrm.size() <= 20))
         && existsAfter(/databases/$(database)/documents/triagens/$(protocolo)/privado/dados);
       // a gestão só muda o status (e a data da alteração)
@@ -213,11 +213,11 @@ service cloud.firestore {
         allow create: if doc == 'dados'
           && !exists(/databases/$(database)/documents/triagens/$(protocolo))
           && existsAfter(/databases/$(database)/documents/triagens/$(protocolo))
-          && request.resource.data.keys().hasOnly(['cpf', 'nascimento', 'contato', 'modalidade', 'anexos'])
+          && request.resource.data.keys().hasOnly(['cpf', 'nascimento', 'contato', 'convenio', 'anexos'])
           && request.resource.data.cpf is string && request.resource.data.cpf.size() == 11
           && request.resource.data.nascimento is string && request.resource.data.nascimento.size() == 10
           && request.resource.data.contato is string && request.resource.data.contato.size() >= 10 && request.resource.data.contato.size() <= 11
-          && request.resource.data.modalidade in ['Presencial', 'Telemedicina']
+          && request.resource.data.convenio is string && request.resource.data.convenio.size() >= 2 && request.resource.data.convenio.size() <= 60
           && request.resource.data.anexos is list;   // sem limite de quantidade de anexos
         allow update: if triagemOk() && mudou().hasOnly(['atualizadoPor'])
           && request.resource.data.atualizadoPor is string && request.resource.data.atualizadoPor.size() <= 60;
