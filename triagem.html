@@ -15,8 +15,8 @@
   <div class="hero-inner">
     <div>
       <span class="eyebrow">🩺 Triagem</span>
-      <h1>Solicitação de Triagem</h1>
-      <p>Registre uma nova solicitação com os documentos do paciente ou acompanhe o andamento pelo número do protocolo.</p>
+      <h1>ação de Triagem</h1>
+      <p>Registre uma nova ação com os documentos do paciente ou acompanhe o andamento pelo número do protocolo.</p>
     </div>
   </div>
 </section>
@@ -25,11 +25,11 @@
 
   <!-- Abas (o JS troca entre elas em triagem.js > abrirAba) -->
   <div class="tg-tabs" role="tablist" aria-label="Triagem">
-    <button type="button" role="tab" class="active" id="tab-nova" data-aba="nova" aria-selected="true" aria-controls="aba-nova">📝 Nova Solicitação</button>
+    <button type="button" role="tab" class="active" id="tab-nova" data-aba="nova" aria-selected="true" aria-controls="aba-nova">📝 Nova ação</button>
     <button type="button" role="tab" id="tab-consultar" data-aba="consultar" aria-selected="false" aria-controls="aba-consultar" tabindex="-1">🔍 Consultar Protocolo</button>
   </div>
 
-  <!-- ===================== NOVA SOLICITAÇÃO ===================== -->
+  <!-- ===================== NOVA AÇÃO ===================== -->
   <section id="aba-nova" role="tabpanel" aria-labelledby="tab-nova">
     <form id="triForm" novalidate autocomplete="off">
 
@@ -76,7 +76,7 @@
 
       <div class="tg-block" role="group" aria-labelledby="h-docs">
         <h2 class="tg-block-head" id="h-docs"><span aria-hidden="true">📎</span> Documentação</h2>
-        <p class="tg-hint">Pedidos médicos, exames e RG, em PDF, JPG, JPEG ou PNG. <b>Sem limite de quantidade.</b> Você também pode <b>colar imagens</b> com <kbd>Ctrl</kbd> + <kbd>V</kbd> (<kbd>⌘</kbd> + <kbd>V</kbd> no Mac). Cada PDF pode ter até 3 MB; as fotos são reduzidas automaticamente.</p>
+        <p class="tg-hint">Exames, encaminhamentos, biópsias em arquivos PDF, JPG, JPEG ou PNG. <b>Sem limite de quantidade.</b> Você também pode <b>colar imagens</b> com <kbd>Ctrl</kbd> + <kbd>V</kbd>. Cada PDF pode ter até 3 MB; as fotos são reduzidas automaticamente.</p>
         <input type="file" id="triFiles" class="tg-file" multiple accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png">
         <label class="tg-drop" id="triDrop" for="triFiles">
           <span class="tg-drop-ico" aria-hidden="true">⬆️</span>
@@ -94,7 +94,7 @@
 
       <div class="au-msg" id="triMsg" role="alert"></div>
       <div class="tg-actions">
-        <button class="btn tg-submit" id="triEnviar" type="submit">📨 Enviar Solicitação</button>
+        <button class="btn tg-submit" id="triEnviar" type="submit">📨 Enviar ação</button>
       </div>
     </form>
   </section>
