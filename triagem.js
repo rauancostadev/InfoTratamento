@@ -35,14 +35,13 @@
 
   /* Mesmos dados do core.js. Precisam ser IDÊNTICOS para os dois arquivos compartilharem o mesmo app Firebase. */
   const firebaseConfig = {
-  apiKey: "AIzaSyApmPmqMNcEw7rPCIfh_CBCjfGLZBdG11Q",
-  authDomain: "infotratamento.firebaseapp.com",
-  projectId: "infotratamento",
-  storageBucket: "infotratamento.firebasestorage.app",
-  messagingSenderId: "972789860884",
-  appId: "1:972789860884:web:a89ec872539d2613173501",
-  measurementId: "G-LTGK6DJ7QR"
-};
+    apiKey: "AIzaSyApmPmqMNcEw7rPCIfh_CBCjfGLZBdG11Q",
+    authDomain: "infotratamento.firebaseapp.com",
+    projectId: "infotratamento",
+    storageBucket: "infotratamento.firebasestorage.app",
+    messagingSenderId: "972789860884",
+    appId: "1:972789860884:web:a89ec872539d2613173501"
+  };
 
   const SDK = 'https://www.gstatic.com/firebasejs/10.12.2/';   /* mesma versão do core.js */
   const COLECAO = 'triagens';
@@ -243,7 +242,7 @@
       fbPromise = Promise.all([import(SDK + 'firebase-app.js'), import(SDK + 'firebase-firestore.js')]).then(function (m) {
         const A = m[0], F = m[1];
         /* reaproveita o app que o core.js já criou (mesmo login da gestão); senão cria um com a mesma configuração */
-        const app = A.getApps().length ? A.getApp() : A.initializeApp(FIREBASE_CONFIG);
+        const app = A.getApps().length ? A.getApp() : A.initializeApp(firebaseConfig);
         return { app: app, F: F, db: F.getFirestore(app) };
       }).catch(function (e) { fbPromise = null; throw e; });
     }
