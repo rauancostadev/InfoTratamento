@@ -361,7 +361,16 @@
       anexos: prontos.map(function (a) { return { nome: a.nome, tipo: a.tipo, tamanho: a.tamanho, partes: a.partes.length }; })
     });
     addPartes(b, lotes[0]);
-    await b.commit();
+    try { await b.commit(); }
+    catch (e) {
+      /* diagnóstico (sem dados pessoais): mostra o que foi enviado para comparar com as regras publicadas */
+      console.error('DIAGNÓSTICO – falha ao gravar o lote 1 de ' + lotes.length + ':', {
+        codigo: e && e.code, protocolo: protocolo, anexosNoLote: lotes[0].itens.length, totalLotes: lotes.length,
+        publico: Object.keys(pub), tamanhos: { nome: pub.nome.length, medico: pub.medico.length, especialidade: (pub.medicoEspecialidade || '').length },
+        privado: { cpf: so09(dados.cpf).length, nascimento: (dados.nascimento || '').length, contato: so09(dados.contato).length, convenio: dados.convenio.trim().length, tipoAtendimento: dados.tipoAtendimento }
+      });
+      throw e;
+    }
     const criadoEm = new Date();
 
     /* lotes extras: cada um é tentado até 3 vezes; se algum falhar a solicitação já existe, então avisamos */
