@@ -17,7 +17,7 @@
      triagens/{LIGA-XXXXX}                 → dados PÚBLICOS da consulta
          { protocolo, nome, medico, medicoEspecialidade?, medicoCrm?, status, criadoEm, atualizadoEm? }
      triagens/{LIGA-XXXXX}/privado/dados   → dados SENSÍVEIS (só a gestão lê)
-         { cpf, nascimento, contato, convenio, anexos:[{nome,tipo,tamanho,partes}], atualizadoPor? }
+         { cpf, nascimento, contato, convenio, tipoAtendimento, anexos:[{nome,tipo,tamanho,partes}], atualizadoPor? }
    (Os dados sensíveis ficam separados para que quem consulta um protocolo nunca receba CPF/telefone.)
 
    ARQUIVOS ANEXOS ficam no próprio Firestore (sem Firebase Storage, plano gratuito):
@@ -49,6 +49,7 @@
 
   /* Status possíveis (o texto é exatamente o que fica salvo no Firestore) */
   const STATUS = { PENDENTE: 'Pendente', AUTORIZADO: 'Autorizado', NAO_AUTORIZADO: 'Não Autorizado', ANALISANDO: 'Analisando' };
+  const TIPOS_ATENDIMENTO = ['1ª vez', 'Reencaminhamento'];
   const STATUS_LISTA = [STATUS.PENDENTE, STATUS.ANALISANDO, STATUS.AUTORIZADO, STATUS.NAO_AUTORIZADO];
   const STATUS_INFO = {
     'Pendente':       { cls: 'pendente',   ico: '🟡', desc: 'Aguardando análise' },
@@ -303,13 +304,13 @@
   }
 
   /* ---------- NOVA SOLICITAÇÃO ----------
-     dados = { nome, cpf, nascimento, contato, convenio, medico, medicoEspecialidade?, medicoCrm? }   arquivos = [File]
+     dados = { nome, cpf, nascimento, contato, convenio, tipoAtendimento, medico, medicoEspecialidade?, medicoCrm? }   arquivos = [File]
      Devolve { protocolo, criadoEm }.
      Ordem: protocolo livre → anexos preparados → lote 1 (solicitação + dados + primeiros anexos, atômico)
             → lotes seguintes só com partes de anexos (quando há muitos arquivos). */
   async function criar(dados, arquivos, avisar) {
     avisar = avisar || function () {};
-    if (!so09(dados.cpf) || !dados.nascimento || !so09(dados.contato) || !(dados.convenio || '').trim() || !(dados.medicoEspecialidade || '').trim()) throw new Error('Nome, CPF, nascimento, contato, convênio e especialidade são obrigatórios.');
+    if (!so09(dados.cpf) || !dados.nascimento || !so09(dados.contato) || !(dados.convenio || '').trim() || TIPOS_ATENDIMENTO.indexOf(dados.tipoAtendimento) < 0 || !(dados.medicoEspecialidade || '').trim()) throw new Error('Nome, CPF, nascimento, contato, convênio e especialidade são obrigatórios.');
     const c = await fb(), F = c.F;
 
     avisar('Gerando protocolo…');
@@ -356,6 +357,7 @@
       nascimento: dados.nascimento || '',
       contato: so09(dados.contato),
       convenio: dados.convenio.trim(),
+      tipoAtendimento: dados.tipoAtendimento,
       anexos: prontos.map(function (a) { return { nome: a.nome, tipo: a.tipo, tamanho: a.tamanho, partes: a.partes.length }; })
     });
     addPartes(b, lotes[0]);
@@ -574,6 +576,7 @@
           '<div><dt>CPF</dt><dd>' + esc(fmtCPF(x.cpf)) + '</dd></div>' +
           '<div><dt>Data de nascimento</dt><dd>' + esc(fmtNascIdade(x.nascimento)) + '</dd></div>' +
           '<div><dt>Convênio</dt><dd>' + esc(x.convenio || '—') + '</dd></div>' +
+          '<div><dt>Tipo de atendimento</dt><dd>' + esc(x.tipoAtendimento || '—') + '</dd></div>' +
           '<div class="tg-wide"><dt>Contato</dt><dd>' + contatoHTML(x.contato) + '</dd></div>' +
         '</dl>' +
         '<section class="tg-anexos"><h4>Anexos <span>' + anexos.length + '</span></h4>' +
@@ -701,7 +704,7 @@
   const $ = id => document.getElementById(id);
   const msgForm = $('triMsg');
   const campos = {
-    nome: $('fNome'), cpf: $('fCpf'), nascimento: $('fNasc'), contato: $('fTel'), convenio: $('fConvenio'),
+    nome: $('fNome'), cpf: $('fCpf'), nascimento: $('fNasc'), contato: $('fTel'), convenio: $('fConvenio'), tipoAtendimento: $('fTipo'),
     medico: $('fMedico'), especialidade: $('fEsp')
   };
   let arquivos = [];                         /* arquivos escolhidos (File) */
@@ -724,6 +727,7 @@
     cpf: function (v) { return !v.trim() ? 'Informe o CPF.' : !validarCPF(v) ? 'CPF inválido. Confira os 11 números.' : ''; },
     nascimento: function (v) { return !v ? 'Informe a data de nascimento.' : !validarNascimento(v) ? 'Data de nascimento inválida.' : ''; },
     contato: function (v) { return !v.trim() ? 'Informe o contato.' : !validarTel(v) ? 'Telefone inválido. Use DDD + número, ex.: (85) 99999-9999.' : ''; },
+    tipoAtendimento: function (v) { return TIPOS_ATENDIMENTO.indexOf(v) < 0 ? 'Selecione o tipo de atendimento.' : ''; },
     convenio: function (v) { return v.trim().length < 2 ? 'Informe o convênio (ou "Particular").' : v.length > 60 ? 'Use no máximo 60 caracteres.' : ''; },
     medico: function (v) { return v.length > 120 ? 'Use no máximo 120 caracteres.' : ''; },
     especialidade: function (v) { return v.trim().length < 2 ? 'Informe a especialidade.' : v.length > 80 ? 'Use no máximo 80 caracteres.' : ''; }
@@ -888,7 +892,7 @@
     const avisar = function (t) { btn.textContent = '⏳ ' + t; };
     try {
       const r = await criar({
-        nome: campos.nome.value, cpf: campos.cpf.value, nascimento: campos.nascimento.value, contato: campos.contato.value, convenio: campos.convenio.value,
+        nome: campos.nome.value, cpf: campos.cpf.value, nascimento: campos.nascimento.value, contato: campos.contato.value, convenio: campos.convenio.value, tipoAtendimento: campos.tipoAtendimento.value,
         medico: campos.medico.value, medicoEspecialidade: campos.especialidade.value
       }, arquivos, avisar);
       form.reset(); arquivos.forEach(liberarPrevia); arquivos = []; renderArquivos(); esconder(msgArq);

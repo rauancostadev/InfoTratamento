@@ -213,11 +213,12 @@ service cloud.firestore {
         allow create: if doc == 'dados'
           && !exists(/databases/$(database)/documents/triagens/$(protocolo))
           && existsAfter(/databases/$(database)/documents/triagens/$(protocolo))
-          && request.resource.data.keys().hasOnly(['cpf', 'nascimento', 'contato', 'convenio', 'anexos'])
+          && request.resource.data.keys().hasOnly(['cpf', 'nascimento', 'contato', 'convenio', 'tipoAtendimento', 'anexos'])
           && request.resource.data.cpf is string && request.resource.data.cpf.size() == 11
           && request.resource.data.nascimento is string && request.resource.data.nascimento.size() == 10
           && request.resource.data.contato is string && request.resource.data.contato.size() >= 10 && request.resource.data.contato.size() <= 11
           && request.resource.data.convenio is string && request.resource.data.convenio.size() >= 2 && request.resource.data.convenio.size() <= 60
+          && request.resource.data.tipoAtendimento in ['1ª vez', 'Reencaminhamento']
           && request.resource.data.anexos is list;   // sem limite de quantidade de anexos
         allow update: if triagemOk() && mudou().hasOnly(['atualizadoPor'])
           && request.resource.data.atualizadoPor is string && request.resource.data.atualizadoPor.size() <= 60;
