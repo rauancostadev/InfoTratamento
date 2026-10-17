@@ -17,7 +17,7 @@
      triagens/{LIGA-XXXXX}                 → dados PÚBLICOS da consulta
          { protocolo, nome, medico, medicoEspecialidade?, medicoCrm?, status, criadoEm, atualizadoEm? }
      triagens/{LIGA-XXXXX}/privado/dados   → dados SENSÍVEIS (só a gestão lê)
-         { cpf, nascimento, contato, anexos:[{nome,tipo,tamanho,partes}], atualizadoPor? }
+         { cpf, nascimento, contato, modalidade, anexos:[{nome,tipo,tamanho,partes}], atualizadoPor? }
    (Os dados sensíveis ficam separados para que quem consulta um protocolo nunca receba CPF/telefone.)
 
    ARQUIVOS ANEXOS ficam no próprio Firestore (sem Firebase Storage, plano gratuito):
@@ -49,6 +49,7 @@
 
   /* Status possíveis (o texto é exatamente o que fica salvo no Firestore) */
   const STATUS = { PENDENTE: 'Pendente', AUTORIZADO: 'Autorizado', NAO_AUTORIZADO: 'Não Autorizado', ANALISANDO: 'Analisando' };
+  const MODALIDADES = ['Presencial', 'Telemedicina'];
   const STATUS_LISTA = [STATUS.PENDENTE, STATUS.ANALISANDO, STATUS.AUTORIZADO, STATUS.NAO_AUTORIZADO];
   const STATUS_INFO = {
     'Pendente':       { cls: 'pendente',   ico: '🟡', desc: 'Aguardando análise' },
@@ -303,12 +304,14 @@
   }
 
   /* ---------- NOVA SOLICITAÇÃO ----------
-     dados = { nome, cpf, nascimento, contato, medico, medicoEspecialidade?, medicoCrm? }   arquivos = [File]
+     dados = { nome, cpf, nascimento, contato, modalidade, medico, medicoEspecialidade?, medicoCrm? }   arquivos = [File]
      Devolve { protocolo, criadoEm }.
      Ordem: protocolo livre → anexos preparados → lote 1 (solicitação + dados + primeiros anexos, atômico)
             → lotes seguintes só com partes de anexos (quando há muitos arquivos). */
   async function criar(dados, arquivos, avisar) {
     avisar = avisar || function () {};
+    if (MODALIDADES.indexOf(dados.modalidade) < 0) throw new Error('Informe a modalidade de atendimento.');
+    if (!so09(dados.cpf) || !dados.nascimento || !so09(dados.contato)) throw new Error('CPF, data de nascimento e contato são obrigatórios.');
     const c = await fb(), F = c.F;
 
     avisar('Gerando protocolo…');
@@ -354,6 +357,7 @@
       cpf: so09(dados.cpf),
       nascimento: dados.nascimento || '',
       contato: so09(dados.contato),
+      modalidade: dados.modalidade,
       anexos: prontos.map(function (a) { return { nome: a.nome, tipo: a.tipo, tamanho: a.tamanho, partes: a.partes.length }; })
     });
     addPartes(b, lotes[0]);
@@ -464,7 +468,7 @@
     const it = itens[pos], pdf = it.tipo === 'application/pdf' || extDe(it.nome) === 'pdf', n = itens.length;
     if (urlPrevia) { URL.revokeObjectURL(urlPrevia); urlPrevia = null; }
     const m = UI.openModal({
-      stack: true,
+      stack: true, outsideClose: !pdf,   /* só imagem fecha ao clicar fora */
       title: it.nome, sub: (n > 1 ? (pos + 1) + ' de ' + n + ' · ' : '') + fmtTamanho(it.tamanho || 0), size: 'wide',
       html: '<div class="tg-prev" aria-live="polite"><span class="tg-prev-load">Carregando…</span></div>',
       foot: (n > 1 ? '<button type="button" class="tg-btn" data-nav="-1">‹ Anterior</button><button type="button" class="tg-btn" data-nav="1">Próximo ›</button>' : '') +
@@ -476,9 +480,9 @@
       if (b.dataset.nav) { UI.backModal(); visualizar(itens, (pos + Number(b.dataset.nav) + n) % n); }
       else if (b.hasAttribute('data-baixar') && blob) baixarBlob(blob, it.nome);
     };
-    /* clicar no contêiner / área em branco volta para a tela anterior (detalhe da triagem) */
+    /* imagem: clicar na área em branco volta para a tela anterior (detalhe da triagem); PDF não */
     m.body.onclick = function (ev) {
-      if (!m.body.contains(ev.target) || ev.target.closest('img, iframe')) return;   /* ignora o clique que abriu o visualizador */
+      if (pdf || !m.body.contains(ev.target) || ev.target.closest('img, iframe')) return;   /* só imagens: clicar no espaço vazio volta */
       UI.backModal();
     };
     Promise.resolve(it.obter()).then(function (bl) {
@@ -538,12 +542,12 @@
       const info = STATUS_INFO[i.status] || STATUS_INFO[STATUS.PENDENTE];
       return '<article class="tg-card ' + info.cls + '" data-p="' + esc(i.protocolo) + '">' +
         '<header class="tg-card-head"><div class="tg-card-id"><span class="tg-proto-tag">' + esc(i.protocolo) + '</span><h3>' + esc(i.nome) + '</h3></div>' +
-          '<span data-badge>' + badge(i.status) + '</span></header>' +
+          '<div class="tg-card-side"><span data-badge>' + badge(i.status) + '</span>' +
+            '<label class="tg-status-sel"><span>Alterar status</span>' +
+              '<select class="tg-select" data-st="' + esc(i.protocolo) + '" aria-label="Alterar status de ' + esc(i.protocolo) + '">' +
+                STATUS_LISTA.map(function (s) { return '<option' + (s === i.status ? ' selected' : '') + '>' + esc(s) + '</option>'; }).join('') +
+              '</select></label></div></header>' +
         '<div class="tg-card-acts">' +
-          '<label class="tg-status-sel"><span>Alterar status</span>' +
-            '<select class="tg-select" data-st="' + esc(i.protocolo) + '" aria-label="Alterar status de ' + esc(i.protocolo) + '">' +
-              STATUS_LISTA.map(function (s) { return '<option' + (s === i.status ? ' selected' : '') + '>' + esc(s) + '</option>'; }).join('') +
-            '</select></label>' +
           '<button class="tg-btn" type="button" data-det="' + esc(i.protocolo) + '" aria-expanded="false">Ver detalhes</button>' +
           (ctx.admin ? '<button class="tg-btn danger" type="button" data-del="' + esc(i.protocolo) + '" title="Excluir esta triagem (somente Administrador)">🗑️ Excluir</button>' : '') +
         '</div>' +
@@ -571,6 +575,7 @@
       return '<dl class="tg-det-grid">' +
           '<div><dt>CPF</dt><dd>' + esc(fmtCPF(x.cpf)) + '</dd></div>' +
           '<div><dt>Data de nascimento</dt><dd>' + esc(fmtNascIdade(x.nascimento)) + '</dd></div>' +
+          '<div><dt>Modalidade de Atendimento</dt><dd>' + esc(x.modalidade || '—') + '</dd></div>' +
           '<div class="tg-wide"><dt>Contato</dt><dd>' + contatoHTML(x.contato) + '</dd></div>' +
         '</dl>' +
         '<section class="tg-anexos"><h4>Anexos <span>' + anexos.length + '</span></h4>' +
@@ -698,7 +703,7 @@
   const $ = id => document.getElementById(id);
   const msgForm = $('triMsg');
   const campos = {
-    nome: $('fNome'), cpf: $('fCpf'), nascimento: $('fNasc'), contato: $('fTel'),
+    nome: $('fNome'), cpf: $('fCpf'), nascimento: $('fNasc'), contato: $('fTel'), modalidade: $('fModal'),
     medico: $('fMedico'), especialidade: $('fEsp')
   };
   let arquivos = [];                         /* arquivos escolhidos (File) */
@@ -718,9 +723,10 @@
   /* ---------- validação de cada campo (devolve texto do erro ou '') ---------- */
   const VALIDA = {
     nome: function (v) { return v.trim().length < 3 ? 'Informe o nome completo do paciente.' : ''; },
-    cpf: function (v) { return v && !validarCPF(v) ? 'CPF inválido. Confira os 11 números.' : ''; },
-    nascimento: function (v) { return v && !validarNascimento(v) ? 'Data de nascimento inválida.' : ''; },
-    contato: function (v) { return v && !validarTel(v) ? 'Telefone inválido. Use DDD + número, ex.: (85) 99999-9999.' : ''; },
+    cpf: function (v) { return !v.trim() ? 'Informe o CPF.' : !validarCPF(v) ? 'CPF inválido. Confira os 11 números.' : ''; },
+    nascimento: function (v) { return !v ? 'Informe a data de nascimento.' : !validarNascimento(v) ? 'Data de nascimento inválida.' : ''; },
+    contato: function (v) { return !v.trim() ? 'Informe o contato.' : !validarTel(v) ? 'Telefone inválido. Use DDD + número, ex.: (85) 99999-9999.' : ''; },
+    modalidade: function (v) { return MODALIDADES.indexOf(v) < 0 ? 'Selecione a modalidade de atendimento.' : ''; },
     medico: function (v) { return v.length > 120 ? 'Use no máximo 120 caracteres.' : ''; },
     especialidade: function (v) { return v.length > 80 ? 'Use no máximo 80 caracteres.' : ''; }
   };
@@ -884,7 +890,7 @@
     const avisar = function (t) { btn.textContent = '⏳ ' + t; };
     try {
       const r = await criar({
-        nome: campos.nome.value, cpf: campos.cpf.value, nascimento: campos.nascimento.value, contato: campos.contato.value,
+        nome: campos.nome.value, cpf: campos.cpf.value, nascimento: campos.nascimento.value, contato: campos.contato.value, modalidade: campos.modalidade.value,
         medico: campos.medico.value, medicoEspecialidade: campos.especialidade.value
       }, arquivos, avisar);
       form.reset(); arquivos.forEach(liberarPrevia); arquivos = []; renderArquivos(); esconder(msgArq);

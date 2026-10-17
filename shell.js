@@ -163,7 +163,8 @@
     modalBody = modalBox.querySelector('.modal-body');
     modalFoot = modalBox.querySelector('.modal-foot');
     modalBox.querySelector('.modal-x').addEventListener('click', UI.closeModal);
-    modalEl.addEventListener('click', function (e) { if (e.target === modalEl) { if (modalStack.length) UI.backModal(); else UI.closeModal(); } });
+    /* clicar fora da janela NÃO fecha, exceto no visualizador de imagens (o.outsideClose) */
+    modalEl.addEventListener('click', function (e) { if (e.target === modalEl && modalEl.dataset.outside === '1') { if (modalStack.length) UI.backModal(); else UI.closeModal(); } });
   }
 
   /* pilha de telas do modal: permite abrir uma tela por cima (visualizador) e voltar para a anterior */
@@ -174,10 +175,11 @@
   UI.openModal = function (o) {
     ensureModal();
     if (o.stack && modalEl.classList.contains('show')) {
-      modalStack.push({ cls: modalBox.className, head: moveNodes(modalHead), headDisp: modalHead.style.display,
+      modalStack.push({ outside: modalEl.dataset.outside, cls: modalBox.className, head: moveNodes(modalHead), headDisp: modalHead.style.display,
         body: moveNodes(modalBody), scroll: modalBody.scrollTop, foot: moveNodes(modalFoot), footDisp: modalFoot.style.display, focus: lastFocus });
       modalHead.innerHTML = ''; modalBody.innerHTML = ''; modalFoot.innerHTML = ''; modalFoot.onclick = null;
     } else if (!modalEl.classList.contains('show')) modalStack = [];
+    modalEl.dataset.outside = o.outsideClose ? '1' : '';
     modalBox.className = 'modal-box' + (o.size === 'wide' ? ' wide' : '') + (o.bare ? ' bare' : '');
     modalHead.innerHTML = o.title ? '<h2>' + UI.esc(o.title) + '</h2>' + (o.sub ? '<small>' + UI.esc(o.sub) + '</small>' : '') : '';
     modalHead.style.display = o.title ? '' : 'none';
@@ -193,7 +195,7 @@
   /* volta para a tela anterior do modal (se houver); retorna true se voltou */
   UI.backModal = function () {
     var p = modalStack.pop(); if (!p) return false;
-    modalBox.className = p.cls;
+    modalBox.className = p.cls; modalEl.dataset.outside = p.outside || '';
     modalHead.innerHTML = ''; modalHead.appendChild(p.head); modalHead.style.display = p.headDisp;
     modalBody.innerHTML = ''; modalBody.appendChild(p.body); modalBody.scrollTop = p.scroll;
     modalBody.onclick = null; modalFoot.innerHTML = ''; modalFoot.onclick = null; modalFoot.appendChild(p.foot); modalFoot.style.display = p.footDisp;
